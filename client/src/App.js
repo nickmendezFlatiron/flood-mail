@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     fetch("/users")
       .then((r) => r.json())
-      .then((data) => console.log(data));
+      .then(console.log);
   }, []);
 
   return (
