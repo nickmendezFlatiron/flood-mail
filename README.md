@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+The Following npm install package-name --prefix client
+- package names:
+  - react-router-dom
+  - bootstrap : only necessary for custom SCSS
+  - react-uuid
+  - react-bootstrap
