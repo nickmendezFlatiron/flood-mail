@@ -9,6 +9,7 @@ import './App.css';
 import Homepage from "./home/Homepage";
 import Navigation from "./navigation/Navigation"
 import Account from "./account/Account";
+import Inbox from "./inbox/Inbox";
 // import Footer from "./Footer";
 // import uuid from 'react-uuid'
 
@@ -35,6 +36,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Homepage setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}/>} />
         <Route path="/account" exact={true} element={<Account user={user}/>} />
+        <Route path="/inbox" exact={true} element={<Inbox />}/>
       </Routes>
     </Fragment>
   );

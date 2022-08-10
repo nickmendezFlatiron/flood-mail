@@ -10,7 +10,8 @@
 #homepage-image {
   display: flex;
   align-items: center;
-  width: 500px;
+  justify-content: center;
+  width: 70vh;
   height: auto;
 }
 

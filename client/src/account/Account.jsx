@@ -10,10 +10,10 @@ const Account = ({user}) => {
     const randomArr = Math.floor(Math.random() * 1643) + 1;
     
     fetch(`https://type.fit/api/quotes`)
-    .then(r => r.json()).then(quote =>setQuote(quote[randomArr]))
+    .then(r => r.json()).then(quote => setQuote(quote[randomArr]))
   } , [])
 
-  console.log({quote})
+  
   return (
 
    <Container className="my-5 bg-light rounded-3">
@@ -26,7 +26,7 @@ const Account = ({user}) => {
           <h1 className='pb-5'>Contacts: <small className='text-secondary'> # Here</small></h1>
           <Button className='mb-4' variant='danger  ' >Burn My Account</Button>
         </Col>
-        <Col className="d-flex align-items-center opacity-75" >
+        <Col className="d-flex align-items-center opacity-75 text-center" >
           <p id="quote">{quote.text}</p>
         </Col>
       </Row>

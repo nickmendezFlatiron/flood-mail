@@ -10,8 +10,8 @@ import image from  "../assets/logo.png"
 
 const Navigation = ({user}) => {
   
-  const logInLink = <Nav.Link as={Link} to="/login" exact>Login</Nav.Link>
-  const signInLink = <Nav.Link as={Link} to="/signup" exact>Signup</Nav.Link>
+  const logInLink = <Nav.Link as={Link} to="/login" exact={true}>Login</Nav.Link>
+  const signInLink = <Nav.Link as={Link} to="/signup" exact={true}>Signup</Nav.Link>
   
   return (
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">
