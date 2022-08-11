@@ -30,7 +30,7 @@ const LoginModal = ({handleClose , showModal}) => {
               <Form.Control
                 type="password"
                 placeholder="Enter password here..."
-                autoFocus
+                
               />
             </Form.Group>
             <Form.Group>

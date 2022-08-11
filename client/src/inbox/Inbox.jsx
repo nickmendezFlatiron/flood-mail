@@ -1,8 +1,15 @@
 import React from 'react'
 import { Container, Row, Col , Button } from 'react-bootstrap'
+
+// React Components
 import Toolbar from './Toolbar'
+import InboxTable from './InboxTable'
+
 const Inbox = () => {
 
+  const mainDisplay = {table: <InboxTable /> , }
+
+  
   return (
     <Container className="my-5 border border-3 rounded">
         <Row className="">
@@ -19,8 +26,8 @@ const Inbox = () => {
           <Row>
             <Toolbar />
           </Row>
-          <Row>
-            <h1>Test</h1>
+          <Row className="mt-1 p-3 height-match">
+            {mainDisplay.table}
           </Row>
           </Col>
         </Row>

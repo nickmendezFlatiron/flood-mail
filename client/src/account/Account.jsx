@@ -16,7 +16,7 @@ const Account = ({user}) => {
   
   return (
 
-   <Container className="my-5 bg-light rounded-3">
+   <Container className="my-4 bg-light rounded-3">
       <Row>
         <Col className="my-5 mx-2 border-bottom rounded bg-white shadow" lg={5}>
           <h1 id='account-username' className=''>{user.username}</h1>
@@ -27,7 +27,7 @@ const Account = ({user}) => {
           <Button className='mb-4' variant='danger  ' >Burn My Account</Button>
         </Col>
         <Col className="d-flex align-items-center opacity-75 text-center" >
-          <p id="quote">{quote.text}</p>
+          <p id="quote"><em>{quote.text}</em></p>
         </Col>
       </Row>
    </Container>

@@ -23,3 +23,8 @@
   font-size: 40px;
   color: #c93c4a;
 }
+
+.height-match {
+  height: 480px;
+  overflow: auto;
+}
