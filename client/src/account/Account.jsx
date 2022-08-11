@@ -1,16 +1,20 @@
 import React , { useEffect , useState }from 'react'
 
-import { Container , Col , Row, Button } from 'react-bootstrap'
+import { Container , Col , Row, Button, Fade } from 'react-bootstrap'
 
 const Account = ({user}) => {
   const [quote , setQuote] = useState("")
+  const [onFade , toggleFade] = useState(false)
 
   
   useEffect(() => {
-    const randomArr = Math.floor(Math.random() * 1643) + 1;
     
     fetch(`https://type.fit/api/quotes`)
-    .then(r => r.json()).then(quote => setQuote(quote[randomArr]))
+    .then(r => r.json())
+    .then(quote => {
+      const randomArr = Math.floor(Math.random() * 1643) + 1;
+      toggleFade(true)
+      setQuote(quote[randomArr])})
   } , [])
 
   
@@ -27,7 +31,9 @@ const Account = ({user}) => {
           <Button className='mb-4' variant='danger  ' >Burn My Account</Button>
         </Col>
         <Col className="d-flex align-items-center opacity-75 text-center" >
-          <p id="quote"><em>{quote.text}</em></p>
+          <Fade in={onFade}  >
+            <p id="quote"><em>{quote.text}</em></p>
+          </Fade>
         </Col>
       </Row>
    </Container>

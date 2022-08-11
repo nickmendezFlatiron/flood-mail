@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap'
 const InboxTable = () => {
 
   return (
-    <Table striped  hover className='border border-3 rounded-3'>
+    <Table striped  hover className='rounded-3'>
     <thead>
       <tr>
         <th>Sender Username</th>
