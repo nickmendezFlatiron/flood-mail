@@ -14,7 +14,7 @@ const Homepage = ({showModal, handleClose , handleShow}) => {
           <div className="container-fluid ">
             <h1 className="display-5 fw-bold">No Personal Information Required.</h1>
             <p className="fs-4 py-3">
-              Direct message other Flood users with complete control over your conversations.
+              Direct message other Flood members with complete control over your conversations.
               Delete a message, and it's gone forever.  
               <br/>
               <strong> For Both Users.</strong>

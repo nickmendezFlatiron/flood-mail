@@ -10,6 +10,7 @@ import Homepage from "./home/Homepage";
 import Navigation from "./navigation/Navigation"
 import Account from "./account/Account";
 import Inbox from "./inbox/Inbox";
+import SignupForm from "./account/SignupForm";
 // import Footer from "./Footer";
 // import uuid from 'react-uuid'
 
@@ -37,6 +38,8 @@ function App() {
         <Route path="/" exact element={<Homepage setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}/>} />
         <Route path="/account" exact={true} element={<Account user={user}/>} />
         <Route path="/inbox" exact={true} element={<Inbox />}/>
+        <Route path="/signup" exact={true} element={<SignupForm />}/>
+
       </Routes>
     </Fragment>
   );

@@ -22,9 +22,9 @@ const NewMessageModal = ({setShow , show}) => {
             />
           </InputGroup>
           <InputGroup className="mb-3">
-            <InputGroup.Text id="basic-addon2">Subject: </InputGroup.Text>
+            {/* <InputGroup.Text id="basic-addon2">Subject: </InputGroup.Text> */}
             <Form.Control
-              placeholder="Subject..."
+              placeholder="Subject Line"
               aria-label="Subject"
               aria-describedby="basic-addon2"
             />
@@ -44,7 +44,7 @@ const NewMessageModal = ({setShow , show}) => {
             Close
           </Button>
           <Button variant="danger" onClick={handleClose}>
-            Save Changes
+            Send 
           </Button>
         </Modal.Footer>
       </Modal>
