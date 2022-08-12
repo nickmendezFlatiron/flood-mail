@@ -1,6 +1,8 @@
 import React , {useState , useEffect} from 'react'
 import { Container, Row, Col, Form, Button , Fade } from 'react-bootstrap'
 
+import uuid from "react-uuid"
+
 const SignupForm = () => {
 
   const [onTransition , toggleTransition] = useState(false)
@@ -9,18 +11,45 @@ const SignupForm = () => {
   const [passwordConfirmation , setPasswordConfirmation] = useState("")
   const [email , setEmail] = useState("")
 
+  const [errors , setErrors] = useState([])
+
+  // Form Control Functions
   function handleUsername(e) {
     setUsername(e.target.value)
+  }
+  function handleEmail(e) {
+    setEmail(e.target.value)
   }
   function handlePassword(e) {
     setPassword(e.target.value)
   }
   function handlePasswordConfirmation(e) {
     setPasswordConfirmation(e.target.value)
+    if (e.target.value.length > 0 && e.target.value !== password) {
+      console.log({password, passwordConfirmation}) 
+    }
   }
-  function handleEmail(e) {
-    setEmail(e.target.value)
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const newAccount = {username , password , passwordConfirmation , email}
+
+    const isEmpty = Object.values(newAccount).filter(key => key.length === 0 || key !== email)
+
+    if(isEmpty.length > 0 ) {
+      return setErrors(["Required field(s) blank"])
+    }
+
+    fetch("/signup" , {
+      method: "POST" ,
+      headers: {"Content-Type": "application/json"} ,
+      body: JSON.stringify(newAccount)
+    })
+
   }
+
+  const isEqual = passwordConfirmation.length > 0 && password !== passwordConfirmation ? "Does Not Match" : "" ;
+  const displayErrors = errors.map(e => <li key={uuid()} className="text-danger">{e}</li>)
 
   useEffect(()=>{
     toggleTransition(true)
@@ -40,33 +69,39 @@ const SignupForm = () => {
           </Col>
           <Col>
           <Fade in={onTransition}>
-          <Form className="py-5 border-3 px-3 rounded-3" id="signup-form">
+          <Form className="py-5 border-3 px-3 rounded-3" id="signup-form" onSubmit={handleSubmit}>
+
             <Form.Group className="mb-3" controlId="formUsername" >
               <Form.Label>Username 
-              <Form.Text className="text-muted ms-2" maxlength="30">
-             <em>{30 - username.length} Characters Remaining</em>
+              <Form.Text className="text-muted ms-2" maxLength="30">
+                <em>{30 - username.length} Characters Remaining</em>
               </Form.Text>
-
               </Form.Label>
-              <Form.Control type="text" placeholder="Username..." maxLength={30} value={username} onChange={handleUsername}/>
+              <Form.Control required type="text" placeholder="Username..." maxLength={30} value={username} onChange={handleUsername}/>
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address <small><em className='text-muted'>optional</em></small></Form.Label>
-              <Form.Control type="email" placeholder="Email..." />
+              <Form.Control type="email" placeholder="Email..." value={email} onChange={handleEmail}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control required type="password" placeholder="Password" value={password} onChange={handlePassword}/>
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="formPasswordConfirmation">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" placeholder="Passwords Must Match" />
+              <Form.Label>Password Confirmation <small><em className='text-muted'>{isEqual}</em></small></Form.Label>
+              <Form.Control required type="password" placeholder="Passwords Must Match" value={passwordConfirmation} onChange={handlePasswordConfirmation}/>
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="I Agree to Terms of Service" />
             </Form.Group> */}
-            <Button variant="danger" type="submit" form="signup-form">
+            <hr />
+            <ul>
+              {displayErrors}
+            </ul>
+            <Button variant="danger" type="submit" form="signup-form" >
               Sign Up
             </Button>
           </Form>

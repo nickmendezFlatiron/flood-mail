@@ -2,10 +2,13 @@ import React , {useState} from 'react'
 import { Modal , Form , Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import uuid from "react-uuid"
+
 const LoginModal = ({handleClose , showModal}) => {
 
   const [password , setPassword] = useState("")
   const [username , setUsername] = useState("")
+  const [errors , setErrors] = useState([])
   
   function handlePassword(e){
     setPassword(e.target.value) 
@@ -22,8 +25,11 @@ const LoginModal = ({handleClose , showModal}) => {
 
   function handleLogin(e){
     e.preventDefault()
+    
+    if( password === "" || username === "") {
+      return setErrors(["Username or Password Field Blank"])
+    }
     const loginInfo = {password , username}
-
     fetch('/login', {
       method: "POST" ,
       headers: {"Content-Type": "application/json"} ,
@@ -32,6 +38,9 @@ const LoginModal = ({handleClose , showModal}) => {
       
   }
 
+  const displayErrors = errors.map(e => <li key={uuid()} className="text-danger">{e}</li>)
+
+  
 
   return (
     <>
@@ -64,6 +73,7 @@ const LoginModal = ({handleClose , showModal}) => {
               />
             </Form.Group>
             <Form.Group>
+              <ul>{displayErrors}</ul>
               <Link to="/signup" className='text-danger opacity-75' exact={true}>Not a user? Sign up here.</Link>
             </Form.Group>
           </Form>
