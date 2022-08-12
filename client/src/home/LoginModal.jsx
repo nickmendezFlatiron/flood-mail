@@ -1,25 +1,54 @@
-import React from 'react'
+import React , {useState} from 'react'
 import { Modal , Form , Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const LoginModal = ({handleClose , showModal}) => {
 
+  const [password , setPassword] = useState("")
+  const [username , setUsername] = useState("")
   
+  function handlePassword(e){
+    setPassword(e.target.value) 
+  }
+  
+  function handleUsername(e) {
+    setUsername(e.target.value)
+  }
+
+  function handleHide(){
+    setPassword("")
+    setUsername("")
+  }
+
+  function handleLogin(e){
+    e.preventDefault()
+    const loginInfo = {password , username}
+
+    fetch('/login', {
+      method: "POST" ,
+      headers: {"Content-Type": "application/json"} ,
+      body: JSON.stringify(loginInfo)
+    })
+      
+  }
+
 
   return (
     <>
-     <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
+     <Modal show={showModal} onHide={handleClose} className="p-5 my-5">
+        <Modal.Header closeButton onHide={handleHide}>
           <Modal.Title>Account Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleLogin} id="login-form">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter username here..."
                 autoFocus
+                value={username}
+                onChange={handleUsername}
               />
             </Form.Group>
             <Form.Group
@@ -30,7 +59,8 @@ const LoginModal = ({handleClose , showModal}) => {
               <Form.Control
                 type="password"
                 placeholder="Enter password here..."
-                
+                value={password}
+                onChange={handlePassword}
               />
             </Form.Group>
             <Form.Group>
@@ -42,7 +72,7 @@ const LoginModal = ({handleClose , showModal}) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="danger" onClick={handleClose}>
+          <Button variant="danger" type="submit" onSubmit={handleLogin} form="login-form">
             Login
           </Button>
         </Modal.Footer>

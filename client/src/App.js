@@ -35,7 +35,7 @@ function App() {
     <Fragment >
       <Navigation user={user} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}/>
       <Routes>
-        <Route path="/" exact element={<Homepage setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}/>} />
+        <Route path="/" exact={true} element={<Homepage setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}/>} />
         <Route path="/account" exact={true} element={<Account user={user}/>} />
         <Route path="/inbox" exact={true} element={<Inbox />}/>
         <Route path="/signup" exact={true} element={<SignupForm />}/>

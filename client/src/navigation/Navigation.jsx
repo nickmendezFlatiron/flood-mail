@@ -4,6 +4,7 @@ import { Navbar , Nav , Container } from 'react-bootstrap'
 
 import DropDown from './DropDown'
 import image from  "../assets/logo.png"
+import Notifications from './Notifications'
 
 // import LoginModal from '../home/LoginModal'
 
@@ -17,15 +18,13 @@ const Navigation = ({user}) => {
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">
       <Container className='justify-content-start'>
         <a href="/"> <img alt='logo' src={image} className="ms-2"  id="nav-logo"/></a>
-        
-          <Navbar.Text>Flood Mail</Navbar.Text>
+        <Navbar.Text>Flood Mail</Navbar.Text>
       </Container>
       <Container className='justify-content-end'>
         <Nav >
           {user.username ? "" : signInLink}
-          
-          <Navbar.Text>Notifics</Navbar.Text>
-          <Nav.Link as={Link} to="/inbox" exact>Inbox</Nav.Link>
+          <Notifications />
+          <Nav.Link as={Link} to="/inbox" exact={true}>Inbox</Nav.Link>
           {user.username ? <DropDown user={user}/> : logInLink}
         </Nav>
       </Container>
