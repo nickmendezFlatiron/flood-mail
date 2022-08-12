@@ -41,3 +41,8 @@
 #signup-text {
   font-size: 50px;
 }
+
+.sender {
+  flex-direction: row-reverse;
+  text-align: start;
+}

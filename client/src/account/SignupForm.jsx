@@ -34,7 +34,7 @@ const SignupForm = () => {
     e.preventDefault()
     const newAccount = {username , password , passwordConfirmation , email}
 
-    const isEmpty = Object.values(newAccount).filter(key => key.length === 0 || key !== email)
+    const isEmpty = Object.values({username , password , passwordConfirmation}).filter(key => key.length === 0 )
 
     if(isEmpty.length > 0 ) {
       return setErrors(["Required field(s) blank"])
@@ -48,7 +48,7 @@ const SignupForm = () => {
 
   }
 
-  const isEqual = passwordConfirmation.length > 0 && password !== passwordConfirmation ? "Does Not Match" : "" ;
+  const isEqual = password !== passwordConfirmation ? "Does Not Match" : "" ;
   const displayErrors = errors.map(e => <li key={uuid()} className="text-danger">{e}</li>)
 
   useEffect(()=>{
@@ -91,7 +91,7 @@ const SignupForm = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPasswordConfirmation">
-              <Form.Label>Password Confirmation <small><em className='text-muted'>{isEqual}</em></small></Form.Label>
+              <Form.Label>Password Confirmation <small><em className='text-danger'>{isEqual}</em></small></Form.Label>
               <Form.Control required type="password" placeholder="Passwords Must Match" value={passwordConfirmation} onChange={handlePasswordConfirmation}/>
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">

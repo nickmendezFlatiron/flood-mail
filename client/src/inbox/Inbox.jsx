@@ -1,18 +1,32 @@
-import React , { useState } from 'react'
+import React , { useState , useEffect} from 'react'
 import { Container, Row, Col , Button , Table } from 'react-bootstrap'
 
 // React Components
 import Toolbar from './Toolbar'
 import InboxTable from './InboxTable'
 import NewMessageModal from './NewMessageModal'
+import Thread from './Thread'
 
 
 const Inbox = () => {
   
-  const mainDisplay = {table: <InboxTable /> , }
+  const [view , setView] = useState("")
+  const mainDisplay = {table: <InboxTable handleClick={handleClick}/> , thread: <Thread />}
+
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
+
+  function handleClick(e){
+    console.log(e)
+    if(e.target.innerText === "Threads") {
+      setView(mainDisplay.table)
+    }
+  }
+
+  useEffect(()=>{
+    setView(mainDisplay.thread)
+  },[])
   
   return (
     <Container className="my-5 border border-3 rounded">
@@ -22,7 +36,7 @@ const Inbox = () => {
             <Button onClick={handleShow} className="btn-danger shadow">New Message</Button>
             <NewMessageModal show={show} setShow={setShow}/>
             <hr />
-            <Button variant="link" className="text-danger align-self-start">Threads</Button>
+            <Button variant="link" className="text-danger align-self-start" onClick={handleClick}>Threads</Button>
             <br />
             <Button variant="link" className="text-danger align-self-start">Dropdown</Button>
             <br />
@@ -43,7 +57,7 @@ const Inbox = () => {
               </thead>
             </Table> */}
           <Row className="mt-1 p-3 height-match">
-            {mainDisplay.table}
+            {view}
           </Row>
           </Col>
         </Row>

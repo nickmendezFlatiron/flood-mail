@@ -1,10 +1,16 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 
+import InboxTableRow from './InboxTableRow'
+
+import uuid from "react-uuid"
+
 const InboxTable = () => {
 
+  let example = [...Array(15).keys()].map(e => <InboxTableRow key={uuid()} />)  
+
   return (
-    <Table striped  hover className='rounded-3'>
+    <Table hover >
     <thead>
       <tr>
         <th>Sender Username</th>
@@ -14,72 +20,7 @@ const InboxTable = () => {
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Mark</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Jacob</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
-      <tr>
-        <td>Larry the Bird</td>
-        <td>Test Thread</td>
-        <td>Hello My Friend , i cantsdgsdg...</td>
-        <td>Time</td>
-      </tr>
+      {example}
     </tbody>
   </Table>
   )
