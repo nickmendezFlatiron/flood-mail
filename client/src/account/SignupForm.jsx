@@ -18,17 +18,20 @@ const SignupForm = () => {
             Create A New
             <br/>
             Flood Account →
+            <br/>
             </h1>
           </Col>
           <Col>
           <Fade in={onTransition}>
           <Form className="py-5 border-3 px-3 rounded-3">
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Username..." />
+              <Form.Label>Username 
               <Form.Text className="text-muted ms-2">
-              X Characters Remaining
+             <em>X Characters Remaining</em>
               </Form.Text>
+
+              </Form.Label>
+              <Form.Control type="text" placeholder="Username..." />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address <small><em className='text-muted'>optional</em></small></Form.Label>
@@ -44,7 +47,7 @@ const SignupForm = () => {
               <Form.Control type="password" placeholder="Passwords Must Match" />
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
+              <Form.Check type="checkbox" label="I Agree to Terms of Service" />
             </Form.Group> */}
             <Button variant="danger" type="submit">
               Sign Up
