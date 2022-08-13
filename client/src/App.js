@@ -23,7 +23,11 @@ function App() {
   const handleShow = () => setShowModal(true);
 
   useEffect(() => {
-   setIstAuthenticated(true)
+
+    if (!user.username) {
+      setIstAuthenticated(false)
+    }
+    setIstAuthenticated(true)
   }, []);
 
   
