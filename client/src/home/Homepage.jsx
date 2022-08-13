@@ -4,7 +4,7 @@ import LoginModal from './LoginModal';
 
 import image from "../assets/logo.png"
 
-const Homepage = ({showModal, handleClose , handleShow}) => {
+const Homepage = ({showModal, handleClose , handleShow , setUser}) => {
 
   return (
     <Container className='align-text-center py-5'>
@@ -21,7 +21,7 @@ const Homepage = ({showModal, handleClose , handleShow}) => {
               <br/>
             </p>
             <Button className="btn btn-danger btn-lg" onClick={handleShow}>Login</Button>
-            <LoginModal handleClose={handleClose} showModal={showModal}/>
+            <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser}/>
           </div>
         </div>
         </Col>

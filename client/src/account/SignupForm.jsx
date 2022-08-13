@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button , Fade } from 'react-bootstrap'
 
 import uuid from "react-uuid"
 
-const SignupForm = () => {
+const SignupForm = ({setUser}) => {
 
   const [onTransition , toggleTransition] = useState(false)
   const [username , setUsername] = useState("")
@@ -32,7 +32,12 @@ const SignupForm = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const newAccount = {username , password , passwordConfirmation , email}
+    const newAccount = {
+      username , 
+      password , 
+      password_confirmation: passwordConfirmation , 
+      email
+    }
 
     const isEmpty = Object.values({username , password , passwordConfirmation}).filter(key => key.length === 0 )
 
@@ -45,6 +50,13 @@ const SignupForm = () => {
       headers: {"Content-Type": "application/json"} ,
       body: JSON.stringify(newAccount)
     })
+      .then(r => {
+          if (r.ok) {
+            r.json().then(user =>{
+              setUser(user)
+            })
+          }
+        })
 
   }
 

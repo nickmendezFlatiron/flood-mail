@@ -17,16 +17,13 @@ import SignupForm from "./account/SignupForm";
 function App() {
  const [user , setUser] = useState({})
  const [showModal, setShowModal] = useState(false);
+ const [isAuthenticated , setIstAuthenticated] = useState(false)
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
   useEffect(() => {
-    fetch("/users")
-      .then((r) => r.json())
-      .then(users => {
-        
-        setUser(users[0])});
+   setIstAuthenticated(true)
   }, []);
 
   
@@ -38,8 +35,7 @@ function App() {
         <Route path="/" exact={true} element={<Homepage setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}/>} />
         <Route path="/account" exact={true} element={<Account user={user}/>} />
         <Route path="/inbox" exact={true} element={<Inbox />}/>
-        <Route path="/signup" exact={true} element={<SignupForm />}/>
-
+        <Route path="/signup" exact={true} element={<SignupForm setUser={setUser}/>}/>
       </Routes>
     </Fragment>
   );

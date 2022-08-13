@@ -1,14 +1,16 @@
 import React , {useState} from 'react'
 import { Modal , Form , Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link , useNavigate} from 'react-router-dom'
 
 import uuid from "react-uuid"
 
-const LoginModal = ({handleClose , showModal}) => {
+const LoginModal = ({handleClose , showModal , setUser}) => {
 
   const [password , setPassword] = useState("")
   const [username , setUsername] = useState("")
   const [errors , setErrors] = useState([])
+  const navigate = useNavigate()
+
   
   function handlePassword(e){
     setPassword(e.target.value) 
@@ -34,6 +36,17 @@ const LoginModal = ({handleClose , showModal}) => {
       method: "POST" ,
       headers: {"Content-Type": "application/json"} ,
       body: JSON.stringify(loginInfo)
+    }) .then(r => {
+      if (r.ok) {
+        r.json().then(user => {
+          setUser(user)
+          handleClose()
+          setPassword("")
+          setUsername("")
+          navigate("/account")
+        })
+      }
+
     })
       
   }

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  email_thread: one
+  is_open: false
+
+two:
+  body: MyText
+  email_thread: two
+  is_open: false
