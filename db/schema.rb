@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_215324) do
     t.string "role", default: "free"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "contacts", array: true
+    t.string "contacts", default: [], array: true
   end
 
   add_foreign_key "messages", "email_threads"

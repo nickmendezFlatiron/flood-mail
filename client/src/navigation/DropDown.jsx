@@ -10,7 +10,6 @@ const DropDown = ({user , setUser , setIsAuthenticated}) => {
   function handleLogout(){
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
-        console.log(r)
         setUser({})
         navigate("/")
         setIsAuthenticated(false)

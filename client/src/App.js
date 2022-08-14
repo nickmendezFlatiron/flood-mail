@@ -44,7 +44,7 @@ function App() {
       <Routes>
         <Route path="/" exact={true} element={<Homepage isAuthenticated={isAuthenticated} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors} user={user}/>} />
         <Route path="/account" exact={true} element={<Account user={user} isAuthenticated={isAuthenticated} navigate={navigate}/>} />
-        <Route path="/inbox" exact={true} element={<Inbox navigate={navigate} isAuthenticated={isAuthenticated}/>}/>
+        <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate} isAuthenticated={isAuthenticated}/>}/>
         <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/>
       </Routes>
     </Fragment>
