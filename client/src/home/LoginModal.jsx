@@ -32,21 +32,25 @@ const LoginModal = ({handleClose , showModal , setUser , errors , setErrors ,  s
       return setErrors(["Username or Password Field Blank"])
     }
     const loginInfo = {password , username}
+
     fetch('/login', {
       method: "POST" ,
       headers: {"Content-Type": "application/json"} ,
       body: JSON.stringify(loginInfo)
     }) .then(r => {
+      // console.log(r)
       if (r.ok) {
         r.json().then(user => {
-          console.log({user})
           setUser(user)
           handleClose()
           setPassword("")
           setUsername("")
           setIsAuthenticated(true)
+          setErrors([])
           navigate("/account")
         })
+      } else {
+        r.json().then(r => setErrors(r.errors))
       }
 
     })
@@ -89,7 +93,7 @@ const LoginModal = ({handleClose , showModal , setUser , errors , setErrors ,  s
             </Form.Group>
             <Form.Group>
               <ul>{displayErrors}</ul>
-              <Link to="/signup" className='text-danger opacity-75' exact={true}>Not a user? Sign up here.</Link>
+              <Link to="/signup" onClick={() => {setErrors([])}}className='text-danger opacity-75' exact={true}>Not a user? Sign up here.</Link>
             </Form.Group>
           </Form>
         </Modal.Body>

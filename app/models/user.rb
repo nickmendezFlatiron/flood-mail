@@ -4,10 +4,10 @@ class User < ApplicationRecord
   has_many :messages , dependent: :destroy
   has_and_belongs_to_many :email_threads , dependent: :destroy
 
-  validates :username , presence: true , uniqueness: true , format: {with: /[a-zA-Z0-9_-]/ , message: "Username may include alphanumeric characters , dashes - , and underscores _"} , length: {maximum: 30 , too_long: "30 characters is the maximum allowed"}
+  validates :username , presence: true , uniqueness: true , format: {with: /[a-zA-Z0-9_-]/ , message: "may include alphanumeric characters , dashes - , and underscores _"} , length: {maximum: 30 , too_long: "30 characters is the maximum allowed"}
   validates :password , confirmation: true , presence: true
   validates :password_confirmation , presence: true
-  validates :email , format: {with: /[a-zA-Z0-9@.]/ , message: "Email may only include alphanumeric characters or @"}
+  validates :email , format: {with: /[a-zA-Z0-9@.]/ , message: "may only include alphanumeric characters or @"}
 
   # THIS IS FOR CONFIRMING A CONTACT
   # validates :is_a_user 

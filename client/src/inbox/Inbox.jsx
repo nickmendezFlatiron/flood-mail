@@ -8,14 +8,14 @@ import NewMessageModal from './NewMessageModal'
 import Thread from './Thread'
 
 
-const Inbox = () => {
+const Inbox = ({navigate , isAuthenticated}) => {
   
   const [view , setView] = useState("")
   const mainDisplay = {table: <InboxTable handleClick={handleClick}/> , thread: <Thread />}
 
   const [show, setShow] = useState(false);
-
   const handleShow = () => setShow(true);
+  
 
   function handleClick(e){
     console.log(e)
@@ -26,8 +26,10 @@ const Inbox = () => {
 
   useEffect(()=>{
     setView(mainDisplay.thread)
-  },[])
+  },[mainDisplay.thread])
   
+  if (!isAuthenticated) return navigate("/")
+
   return (
     <Container className="my-5 border border-3 rounded">
         <Row className="">

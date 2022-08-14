@@ -1,5 +1,5 @@
 import {React , Fragment, useState, useEffect } from "react";
-import { Routes , Route } from "react-router-dom";
+import { Routes , Route , useNavigate} from "react-router-dom";
 
 // CSS Styling
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +12,7 @@ import Account from "./account/Account";
 import Inbox from "./inbox/Inbox";
 import SignupForm from "./account/SignupForm";
 import Container from "react-bootstrap/Container"
+ 
 // import Footer from "./Footer";
 // import uuid from 'react-uuid'
 
@@ -20,6 +21,8 @@ function App() {
  const [showModal, setShowModal] = useState(false);
  const [isAuthenticated , setIsAuthenticated] = useState(false)
  const [errors , setErrors] = useState([])
+
+ const navigate = useNavigate()
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -39,10 +42,10 @@ function App() {
     <Fragment >
       <Navigation user={user} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}  setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>
       <Routes>
-        <Route path="/" exact={true} element={<Homepage is setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors}/>} />
-        <Route path="/account" exact={true} element={<Account user={user} isAuthenticated={isAuthenticated}/>} />
-        <Route path="/inbox" exact={true} element={<Inbox />}/>
-        <Route path="/signup" exact={true} element={<SignupForm setUser={setUser}/>}/>
+        <Route path="/" exact={true} element={<Homepage isAuthenticated={isAuthenticated} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors} user={user}/>} />
+        <Route path="/account" exact={true} element={<Account user={user} isAuthenticated={isAuthenticated} navigate={navigate}/>} />
+        <Route path="/inbox" exact={true} element={<Inbox navigate={navigate} isAuthenticated={isAuthenticated}/>}/>
+        <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/>
       </Routes>
     </Fragment>
   );

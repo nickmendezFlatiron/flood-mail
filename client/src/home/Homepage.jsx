@@ -4,10 +4,17 @@ import LoginModal from './LoginModal';
 import { Link } from 'react-router-dom';
 import image from "../assets/logo.png"
 
-const Homepage = ({showModal, handleClose , handleShow , setUser , errors , setErrors , setIsAuthenticated}) => {
+const Homepage = ({user, showModal, handleClose , handleShow , setUser , errors , setErrors , setIsAuthenticated , isAuthenticated}) => {
 
   
+  const login = <>
+            <Button className="btn btn-danger btn-lg" onClick={handleShow}>Login</Button>
+            <Link to="/signup" className='text-danger opacity-75 ms-3' exact={true}>Not a user? Sign up here.</Link> 
+            <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser} errors={errors} setErrors={setErrors}  setIsAuthenticated={ setIsAuthenticated}/>
+  </>
+  const helloMessage = <h3 className="text-danger"><strong>Welcome {user.username}!</strong></h3>
 
+  const message = !isAuthenticated ? login : helloMessage
   return (
     <Container className='align-text-center py-5'>
     
@@ -23,9 +30,7 @@ const Homepage = ({showModal, handleClose , handleShow , setUser , errors , setE
               <strong> For Both Users.</strong>
               <br/>
             </p>
-            <Button className="btn btn-danger btn-lg" onClick={handleShow}>Login</Button>
-            <Link to="/signup" className='text-danger opacity-75 ms-3' exact={true}>Not a user? Sign up here.</Link> 
-            <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser} errors={errors} setErrors={setErrors}  setIsAuthenticated={ setIsAuthenticated}/>
+           {message}
           </div>
         </div>
         </Col>

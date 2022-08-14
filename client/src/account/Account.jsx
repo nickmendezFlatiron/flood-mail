@@ -1,13 +1,13 @@
 import React , { useEffect , useState }from 'react'
 import { Container , Col , Row, Button, Fade } from 'react-bootstrap'
 
-import { useNavigate } from 'react-router-dom'
 
-const Account = ({user , isAuthenticated}) => {
+
+const Account = ({user , isAuthenticated , navigate}) => {
   const [quote , setQuote] = useState("")
   const [onFade , toggleFade] = useState(false)
 
-  const navigate = useNavigate()
+  
   
   useEffect(() => {
     
@@ -15,12 +15,12 @@ const Account = ({user , isAuthenticated}) => {
     .then(r => r.json())
     .then(quote => {
       const randomArr = Math.floor(Math.random() * 1643) + 1;
-      toggleFade(true)
       setQuote(quote[randomArr])})
-  } , [])
+      if (isAuthenticated) {toggleFade(true)}
+    } , [])
+    
+    if (!isAuthenticated) return navigate("/")
 
-  if (!isAuthenticated) return navigate("/")
-  
   return (
 
    <Container className="my-4 bg-light rounded-3">

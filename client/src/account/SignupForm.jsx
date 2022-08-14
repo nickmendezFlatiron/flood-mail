@@ -4,7 +4,7 @@ import { useNavigate , Link } from 'react-router-dom'
 
 import uuid from "react-uuid"
 
-const SignupForm = ({setUser}) => {
+const SignupForm = ({setUser , errors , setErrors}) => {
 
   const [onTransition , toggleTransition] = useState(false)
   const [username , setUsername] = useState("")
@@ -12,7 +12,7 @@ const SignupForm = ({setUser}) => {
   const [passwordConfirmation , setPasswordConfirmation] = useState("")
   const [email , setEmail] = useState("")
 
-  const [errors , setErrors] = useState([])
+  
   const navigate = useNavigate()
   // Form Control Functions
   function handleUsername(e) {
@@ -26,9 +26,6 @@ const SignupForm = ({setUser}) => {
   }
   function handlePasswordConfirmation(e) {
     setPasswordConfirmation(e.target.value)
-    if (e.target.value.length > 0 && e.target.value !== password) {
-      console.log({password, passwordConfirmation}) 
-    }
   }
 
   function handleSubmit(e) {
@@ -42,9 +39,9 @@ const SignupForm = ({setUser}) => {
 
     const isEmpty = Object.values({username , password , passwordConfirmation}).filter(key => key.length === 0 )
 
-    if(isEmpty.length > 0 ) {
-      return setErrors(["Required field(s) blank"])
-    }
+    // if(isEmpty.length > 0 ) {
+    //   return setErrors(["Required field(s) blank"])
+    // }
 
     fetch("/signup" , {
       method: "POST" ,
@@ -52,6 +49,7 @@ const SignupForm = ({setUser}) => {
       body: JSON.stringify(newAccount)
     })
       .then(r => {
+        
           if (r.ok) {
             r.json().then(user =>{
               console.log(user)
@@ -62,6 +60,8 @@ const SignupForm = ({setUser}) => {
               setEmail("")
               navigate("/account")
             })
+          } else {
+            r.json().then(r => setErrors(r.errors))
           }
         })
 
@@ -74,6 +74,7 @@ const SignupForm = ({setUser}) => {
     toggleTransition(true)
   },[])
   
+
   return (
     
       <Container className='my-4 py-5 border border-5 rounded-3 bg-light'>
@@ -96,7 +97,7 @@ const SignupForm = ({setUser}) => {
                 <em>{30 - username.length} Characters Remaining</em>
               </Form.Text>
               </Form.Label>
-              <Form.Control required type="text" placeholder="Username..." maxLength={30} value={username} onChange={handleUsername}/>
+              <Form.Control  type="text" placeholder="Username..." maxLength={30} value={username} onChange={handleUsername}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -106,12 +107,12 @@ const SignupForm = ({setUser}) => {
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control required type="password" placeholder="Password" value={password} onChange={handlePassword}/>
+              <Form.Control  type="password" placeholder="Password" value={password} onChange={handlePassword}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formPasswordConfirmation">
               <Form.Label>Password Confirmation <small><em className='text-danger'>{isEqual}</em></small></Form.Label>
-              <Form.Control required type="password" placeholder="Passwords Must Match" value={passwordConfirmation} onChange={handlePasswordConfirmation}/>
+              <Form.Control  type="password" placeholder="Passwords Must Match" value={passwordConfirmation} onChange={handlePasswordConfirmation}/>
             </Form.Group>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="I Agree to Terms of Service" />
@@ -123,7 +124,7 @@ const SignupForm = ({setUser}) => {
             <Button variant="danger" type="submit" form="signup-form" >
               Sign Up
             </Button>
-            <Link to="/" className='text-danger opacity-75 ms-3' exact={true}>Have an account? Login here.</Link> 
+            <Link to="/" onClick={() => {setErrors([])}} className='text-danger opacity-75 ms-3' exact={true}>Have an account? Login here.</Link> 
           </Form>
           </Fade>
           </Col>
