@@ -1,13 +1,16 @@
 import React , {useState} from 'react'
-import { Container , Button , Row , Col} from 'react-bootstrap'
+import { Container , Button , Row , Col , Nav} from 'react-bootstrap'
 import LoginModal from './LoginModal';
-
+import { Link } from 'react-router-dom';
 import image from "../assets/logo.png"
 
-const Homepage = ({showModal, handleClose , handleShow , setUser}) => {
+const Homepage = ({showModal, handleClose , handleShow , setUser , errors , setErrors , setIsAuthenticated}) => {
+
+  
 
   return (
     <Container className='align-text-center py-5'>
+    
       <Row  className="py-5 mb-4 bg-light rounded-3 shadow">
         <Col lg={6} >
           <div>
@@ -21,7 +24,8 @@ const Homepage = ({showModal, handleClose , handleShow , setUser}) => {
               <br/>
             </p>
             <Button className="btn btn-danger btn-lg" onClick={handleShow}>Login</Button>
-            <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser}/>
+            <Link to="/signup" className='text-danger opacity-75 ms-3' exact={true}>Not a user? Sign up here.</Link> 
+            <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser} errors={errors} setErrors={setErrors}  setIsAuthenticated={ setIsAuthenticated}/>
           </div>
         </div>
         </Col>

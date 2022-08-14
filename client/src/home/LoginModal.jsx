@@ -4,11 +4,11 @@ import { Link , useNavigate} from 'react-router-dom'
 
 import uuid from "react-uuid"
 
-const LoginModal = ({handleClose , showModal , setUser}) => {
+const LoginModal = ({handleClose , showModal , setUser , errors , setErrors ,  setIsAuthenticated}) => {
 
   const [password , setPassword] = useState("")
   const [username , setUsername] = useState("")
-  const [errors , setErrors] = useState([])
+  
   const navigate = useNavigate()
 
   
@@ -39,10 +39,12 @@ const LoginModal = ({handleClose , showModal , setUser}) => {
     }) .then(r => {
       if (r.ok) {
         r.json().then(user => {
+          console.log({user})
           setUser(user)
           handleClose()
           setPassword("")
           setUsername("")
+          setIsAuthenticated(true)
           navigate("/account")
         })
       }

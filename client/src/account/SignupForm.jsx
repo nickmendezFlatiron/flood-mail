@@ -1,5 +1,6 @@
 import React , {useState , useEffect} from 'react'
 import { Container, Row, Col, Form, Button , Fade } from 'react-bootstrap'
+import { useNavigate , Link } from 'react-router-dom'
 
 import uuid from "react-uuid"
 
@@ -12,7 +13,7 @@ const SignupForm = ({setUser}) => {
   const [email , setEmail] = useState("")
 
   const [errors , setErrors] = useState([])
-
+  const navigate = useNavigate()
   // Form Control Functions
   function handleUsername(e) {
     setUsername(e.target.value)
@@ -53,7 +54,13 @@ const SignupForm = ({setUser}) => {
       .then(r => {
           if (r.ok) {
             r.json().then(user =>{
+              console.log(user)
               setUser(user)
+              setUsername("")
+              setPassword("")
+              setPasswordConfirmation("")
+              setEmail("")
+              navigate("/account")
             })
           }
         })
@@ -116,6 +123,7 @@ const SignupForm = ({setUser}) => {
             <Button variant="danger" type="submit" form="signup-form" >
               Sign Up
             </Button>
+            <Link to="/" className='text-danger opacity-75 ms-3' exact={true}>Have an account? Login here.</Link> 
           </Form>
           </Fade>
           </Col>

@@ -9,10 +9,15 @@ import Notifications from './Notifications'
 // import LoginModal from '../home/LoginModal'
 
 
-const Navigation = ({user}) => {
+const Navigation = ({user, setUser ,  setIsAuthenticated , isAuthenticated}) => {
   
-  const logInLink = <Nav.Link as={Link} to="/login" exact={true}>Login</Nav.Link>
   const signInLink = <Nav.Link as={Link} to="/signup" exact={true}>Signup</Nav.Link>
+
+  const nav = <Nav>
+                <Notifications />
+                <Nav.Link as={Link} to="/inbox" exact={true}>Inbox</Nav.Link>
+                <DropDown user={user} setUser={setUser} setIsAuthenticated={setIsAuthenticated}/> 
+              </Nav>
   
   return (
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">
@@ -20,13 +25,8 @@ const Navigation = ({user}) => {
         <a href="/"> <img alt='logo' src={image} className="ms-2"  id="nav-logo"/></a>
         <Navbar.Text>Flood Mail</Navbar.Text>
       </Container>
-      <Container className='justify-content-end'>
-        <Nav >
-          {user.username ? "" : signInLink}
-          <Notifications />
-          <Nav.Link as={Link} to="/inbox" exact={true}>Inbox</Nav.Link>
-          {user.username ? <DropDown user={user}/> : logInLink}
-        </Nav>
+      <Container className='justify-content-end text-danger'>
+       {isAuthenticated ? nav : signInLink}
       </Container>
     </Navbar>
   )

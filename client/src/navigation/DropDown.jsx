@@ -4,14 +4,16 @@ import { NavDropdown , Button } from 'react-bootstrap'
 import { Link , useNavigate} from 'react-router-dom';
 
 
-const DropDown = ({user , setUser}) => {
+const DropDown = ({user , setUser , setIsAuthenticated}) => {
   const navigate = useNavigate();
 
   function handleLogout(){
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
+        console.log(r)
         setUser({})
         navigate("/")
+        setIsAuthenticated(false)
       }
     }); 
   }

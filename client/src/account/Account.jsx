@@ -1,11 +1,13 @@
 import React , { useEffect , useState }from 'react'
-
 import { Container , Col , Row, Button, Fade } from 'react-bootstrap'
 
-const Account = ({user}) => {
+import { useNavigate } from 'react-router-dom'
+
+const Account = ({user , isAuthenticated}) => {
   const [quote , setQuote] = useState("")
   const [onFade , toggleFade] = useState(false)
 
+  const navigate = useNavigate()
   
   useEffect(() => {
     
@@ -17,6 +19,7 @@ const Account = ({user}) => {
       setQuote(quote[randomArr])})
   } , [])
 
+  if (!isAuthenticated) return navigate("/")
   
   return (
 
@@ -25,9 +28,9 @@ const Account = ({user}) => {
         <Col className="my-5 mx-2 border-bottom rounded bg-white shadow" lg={5}>
           <h1 id='account-username' className=''>{user.username}</h1>
           <h3 className='mb-5 text-secondary'>{user.email && user.email}</h3>
-          <h1 className='pb-2'>Messages: <small className='text-secondary'> # Here</small></h1>
-          <h1 className='pb-2'>Threads: <small className='text-secondary'> # Here</small></h1>
-          <h1 className='pb-5'>Contacts: <small className='text-secondary'> # Here</small></h1>
+          <h1 className='pb-2'>Messages: <small className='text-secondary'>{user.message_count}</small></h1>
+          <h1 className='pb-2'>Threads: <small className='text-secondary'>{user.email_thread_count}</small></h1>
+          <h1 className='pb-5'>Contacts: <small className='text-secondary'>{}</small></h1>
           <Button className='mb-4' variant='danger  ' >Burn My Account</Button>
         </Col>
         <Col className="d-flex align-items-center opacity-75 text-center" >

@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   resources :email_threads
   resources :messages
 
-  # namespace :api do
-    resources :users , only: [:index , :show]
+  # Sessions Controller
+  post "/login", to: "sessions#login"
+  delete 'logout' , to: "sessions#destroy"
+  
+  # Users Controller
+  # resources :users , only: [:index , :show]
     post "/signup" , to: "users#create" 
-    post "/login", to: "sessions#login"
-  # end
+    get "/authorize" , to: "users#show"
+  
   
    get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

@@ -7,10 +7,14 @@ class UsersController < ApplicationController
     session[:user_id] = user.id
   end
 
-  def index
-    users = User.all
-    render json: users , status: :ok
-  end 
+  def show
+    if current_user
+      render json: current_user , status: :created
+    else 
+      render json: [error: "Not Authorized"] , status: :unauthorized
+    end 
+
+  end
   
   private
 
