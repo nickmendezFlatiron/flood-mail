@@ -73,7 +73,6 @@ const SignupForm = ({setShowModal, setUser , errors , setErrors , showModal , ha
 
   useEffect(()=>{
     toggleTransition(true)
-    setShowModal(true)
   },[])
   
   function handleLogin(){
