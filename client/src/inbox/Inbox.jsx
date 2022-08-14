@@ -6,19 +6,19 @@ import Toolbar from './Toolbar'
 import InboxTable from './InboxTable'
 import NewMessageModal from './NewMessageModal'
 import Thread from './Thread'
+import InboxTableRow from './InboxTableRow'
 
 
 const Inbox = ({navigate , isAuthenticated , user}) => {
-  
-  const mainDisplay = {table: <InboxTable handleClick={handleClick}/> , thread: <Thread />}
-  const [view , setView] = useState(mainDisplay.table)
+  const [emailThreads , setEmailThreads] = useState([])
 
+  const mainDisplay = {table: <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads}/> , thread: <Thread />}
+  const [view , setView] = useState(mainDisplay.table)
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   
 
   function handleClick(e){
-    console.log(e)
     if(e.target.innerText === "Threads") {
       setView(mainDisplay.table)
     }
@@ -26,8 +26,12 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
 
   useEffect(()=> {
     fetch(`/user/threads`)
+    .then(r => {
+      if (r.ok) {
+        r.json().then(emailThreads => setEmailThreads([...emailThreads]))
+      }
+    })
   } ,[])
-  
   
 
   return (
@@ -48,16 +52,6 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
           <Row>
             <Toolbar/>
           </Row>
-            {/* <Table>
-              <thead>
-                <tr>
-                  <th>Sender Username</th>
-                  <th>Thread Subject</th>
-                  <th>Latest Message From Thread</th>
-                  <th>Timestamp</th>
-                </tr>
-              </thead>
-            </Table> */}
           <Row className="mt-1 p-3 height-match">
             {view}
           </Row>

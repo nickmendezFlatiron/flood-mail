@@ -1,9 +1,9 @@
 class UserEmailThreadSerializer < ActiveModel::Serializer
-  attributes :id , :subject , :emails
+  attributes :id , :subject  
 
-  has_many :messages
+  # has_many :messages
 
-  def emails
-    debug
-  end 
+  # def emails
+  #   byebug
+  # end 
 end

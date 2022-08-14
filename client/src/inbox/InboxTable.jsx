@@ -5,10 +5,10 @@ import InboxTableRow from './InboxTableRow'
 
 import uuid from "react-uuid"
 
-const InboxTable = () => {
+const InboxTable = ({emailThreads , user}) => {
 
-  let example = [...Array(15).keys()].map(e => <InboxTableRow key={uuid()} />)  
-
+  let renderThreads = emailThreads.map(thread => <InboxTableRow key={uuid()} user={user} thread={thread}/>)  
+  console.log(emailThreads)
   return (
     <Table hover >
     <thead>
@@ -20,7 +20,7 @@ const InboxTable = () => {
       </tr>
     </thead>
     <tbody>
-      {example}
+      {renderThreads}
     </tbody>
   </Table>
   )

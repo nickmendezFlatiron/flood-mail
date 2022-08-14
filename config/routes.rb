@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get "/authorize" , to: "users#show"
   
   # Email Threads Controller
-    get "/user/threads", to: "email_threads#user_threads"
+    get "/user/threads", to: "email_threads#index"
     
   
    get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

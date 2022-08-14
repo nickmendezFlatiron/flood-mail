@@ -2,11 +2,12 @@ class EmailThreadsController < ApplicationController
   
   
   
-  def user_threads
-    user = User.find(session[:user_id])
-    emails = EmailThread.all
-    byebug
-    render json: emails , serializer: UserEmailThreadSerializer , status: :ok
+  def index
+    if current_user
+      email_threads = current_user.email_threads
+      # byebug
+      render json: email_threads , status: :ok
+    end
   end
 
 end
