@@ -11,14 +11,7 @@ const InboxTable = ({emailThreads , user}) => {
   console.log(emailThreads)
   return (
     <Table hover >
-    <thead>
-      <tr>
-        <th>Sender Username</th>
-        <th>Thread Subject</th>
-        <th>Latest Message From Thread</th>
-        <th>Timestamp</th>
-      </tr>
-    </thead>
+     
     <tbody>
       {renderThreads}
     </tbody>

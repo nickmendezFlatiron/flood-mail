@@ -16,7 +16,7 @@ const NewMessageModal = ({setShow , show}) => {
           <InputGroup className="mb-3">
             <InputGroup.Text id="basic-addon1">To: </InputGroup.Text>
             <Form.Control
-              placeholder="Username..."
+              placeholder="Username (Case Sensitive)"
               aria-label="Username"
               aria-describedby="basic-addon1"
             />

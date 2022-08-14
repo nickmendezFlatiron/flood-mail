@@ -19,7 +19,7 @@ const Account = ({user , isAuthenticated , navigate}) => {
       if (isAuthenticated) {toggleFade(true)}
     } , [])
     
-    if (!isAuthenticated) return navigate("/")
+    // if (!isAuthenticated) return navigate("/")
 
   return (
 
