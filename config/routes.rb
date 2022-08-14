@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   delete "logout" , to: "sessions#destroy"
   
   # Users Controller
-  # resources :users , only: [:index , :show]
-    post "/signup" , to: "users#create" 
-    get "/authorize" , to: "users#show"
+  resources :users , only: [:destroy]
+  post "/signup" , to: "users#create" 
+  get "/authorize" , to: "users#show"
   
   # Email Threads Controller
     get "/user/threads", to: "email_threads#index"

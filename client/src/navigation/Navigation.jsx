@@ -11,14 +11,6 @@ import Notifications from './Notifications'
 
 const Navigation = ({user, setUser ,  setIsAuthenticated , isAuthenticated}) => {
   
-  const signInLink = <Nav.Link as={Link} to="/signup" exact={true}>Signup</Nav.Link>
-
-  const nav = <Nav>
-                <Notifications />
-                <Nav.Link as={Link} to="/inbox" exact={true}>Inbox</Nav.Link>
-                <DropDown user={user} setUser={setUser} setIsAuthenticated={setIsAuthenticated}/> 
-              </Nav>
-  
   return (
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">
       <Container className='justify-content-start'>
@@ -26,7 +18,11 @@ const Navigation = ({user, setUser ,  setIsAuthenticated , isAuthenticated}) => 
         <Navbar.Text>Flood Mail</Navbar.Text>
       </Container>
       <Container className='justify-content-end text-danger'>
-       {isAuthenticated ? nav : signInLink}
+      <Nav>
+        <Notifications />
+        <Nav.Link as={Link} to="/inbox" exact={true}>Inbox</Nav.Link>
+        <DropDown user={user} setUser={setUser} setIsAuthenticated={setIsAuthenticated}/> 
+      </Nav>
       </Container>
     </Navbar>
   )

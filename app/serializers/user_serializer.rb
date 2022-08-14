@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :username, :email, :role , :contacts , :message_count , :email_thread_count
+  attributes :username, :id, :email, :role , :contacts , :message_count , :email_thread_count
 
   # has_many :email_threads
 

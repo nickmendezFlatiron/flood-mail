@@ -23,6 +23,7 @@ const LoginModal = ({handleClose , showModal , setUser , errors , setErrors ,  s
   function handleHide(){
     setPassword("")
     setUsername("")
+    setErrors([])
   }
 
   function handleLogin(e){
@@ -56,7 +57,10 @@ const LoginModal = ({handleClose , showModal , setUser , errors , setErrors ,  s
     })
       
   }
-
+  function handleClick(){
+    handleClose()
+    setErrors([])
+  }
   const displayErrors = errors.map(e => <li key={uuid()} className="text-danger">{e}</li>)
 
   
@@ -98,7 +102,7 @@ const LoginModal = ({handleClose , showModal , setUser , errors , setErrors ,  s
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClick}>
             Close
           </Button>
           <Button variant="danger" type="submit" onSubmit={handleLogin} form="login-form">

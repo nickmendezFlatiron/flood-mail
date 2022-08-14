@@ -2,9 +2,10 @@ import React , {useState , useEffect} from 'react'
 import { Container, Row, Col, Form, Button , Fade } from 'react-bootstrap'
 import { useNavigate , Link } from 'react-router-dom'
 
+import LoginModal from '../home/LoginModal'
 import uuid from "react-uuid"
 
-const SignupForm = ({setUser , errors , setErrors}) => {
+const SignupForm = ({setShowModal, setUser , errors , setErrors , showModal , handleClose , setIsAuthenticated , handleShow}) => {
 
   const [onTransition , toggleTransition] = useState(false)
   const [username , setUsername] = useState("")
@@ -68,22 +69,27 @@ const SignupForm = ({setUser , errors , setErrors}) => {
   }
 
   const isEqual = password !== passwordConfirmation ? "Does Not Match" : "" ;
-  const displayErrors = errors.map(e => <li key={uuid()} className="text-danger">{e}</li>)
+  const displayErrors = !showModal && errors.map(e => <li key={uuid()} className="text-danger">{e}</li>)
 
   useEffect(()=>{
     toggleTransition(true)
+    setShowModal(true)
   },[])
   
+  function handleLogin(){
+    setErrors([])
+    handleShow()
+  }
 
   return (
     
-      <Container className='my-4 py-5 border border-5 rounded-3 bg-light'>
+      <Container className='my-5 py-4 border border-5 rounded-3 bg-light'>
         <Row className="mx-3">
           <Col className="bg-danger rounded-4 d-flex text- align-items-center justify-content-center text-white">
             <h1 id='signup-text'>
             Create A New
             <br/>
-            Flood Account →
+            Flood Mail Account →
             <br/>
             </h1>
           </Col>
@@ -124,9 +130,10 @@ const SignupForm = ({setUser , errors , setErrors}) => {
             <Button variant="danger" type="submit" form="signup-form" >
               Sign Up
             </Button>
-            <Link to="/" onClick={() => {setErrors([])}} className='text-danger opacity-75 ms-3' exact={true}>Have an account? Login here.</Link> 
+            <Link as={Button} to="/" onClick={handleLogin} className='text-danger opacity-75 ms-3' exact={true}>Have an account? Login here.</Link> 
           </Form>
           </Fade>
+          <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser} errors={errors} setErrors={setErrors}  setIsAuthenticated={ setIsAuthenticated}/>
           </Col>
         </Row>
       </Container>

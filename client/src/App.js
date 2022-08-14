@@ -1,6 +1,7 @@
 import {React , Fragment, useState, useEffect } from "react";
 import { Routes , Route , useNavigate} from "react-router-dom";
 
+
 // CSS Styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -11,7 +12,7 @@ import Navigation from "./navigation/Navigation"
 import Account from "./account/Account";
 import Inbox from "./inbox/Inbox";
 import SignupForm from "./account/SignupForm";
-import Container from "react-bootstrap/Container"
+
  
 // import Footer from "./Footer";
 // import uuid from 'react-uuid'
@@ -37,15 +38,18 @@ function App() {
       }
   })}
   , []);
-  
+
+
+  if (!isAuthenticated) return  <SignupForm setShowModal={setShowModal} isAuthenticated={isAuthenticated} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors}/>
+
   return (
     <Fragment >
       <Navigation user={user} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}  setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>
       <Routes>
         <Route path="/" exact={true} element={<Homepage isAuthenticated={isAuthenticated} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors} user={user}/>} />
-        <Route path="/account" exact={true} element={<Account user={user} isAuthenticated={isAuthenticated} navigate={navigate}/>} />
+        <Route path="/account" exact={true} element={<Account user={user} isAuthenticated={isAuthenticated} navigate={navigate} />} />
         <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate} isAuthenticated={isAuthenticated}/>}/>
-        <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/>
+        {/* <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/> */}
       </Routes>
     </Fragment>
   );

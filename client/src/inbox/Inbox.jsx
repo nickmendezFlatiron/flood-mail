@@ -1,5 +1,10 @@
 import React , { useState , useEffect} from 'react'
-import { Container, Row, Col , Button , Table } from 'react-bootstrap'
+
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from "react-bootstrap/Col"
+import Button from "react-bootstrap/Button"
+
 
 // React Components
 import Toolbar from './Toolbar'
@@ -28,16 +33,19 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
     fetch(`/user/threads`)
     .then(r => {
       if (r.ok) {
-        r.json().then(emailThreads => setEmailThreads([...emailThreads]))
+        r.json().then(emailThreads => {
+          setEmailThreads([...emailThreads])
+          setView(mainDisplay.table)
+        })
       }
     })
   } ,[])
   
 
   return (
-    <Container className="my-5 border border-3 rounded">
+    <Container className="my-4 border border-3 rounded">
         <Row className="">
-          <Col className="border-end border-3 pt-3 d-flex flex-column bg-light" md={2}>
+          <Col className="border-end border-3 pt-3 d-flex flex-column bg-light height-match" md={2}>
            
             <Button onClick={handleShow} className="btn-danger shadow">New Message</Button>
             <NewMessageModal show={show} setShow={setShow}/>
@@ -46,13 +54,13 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
             <br />
             <Button variant="link" className="text-danger align-self-start">Dropdown</Button>
             <br />
-            <Button variant="link" className="text-danger align-self-start">Link</Button>
+            <Button variant="link"className="text-danger align-self-start">Contact List</Button>
           </Col>
           <Col className="pt-3">
           <Row>
             <Toolbar/>
           </Row>
-          <Row className="mt-1 p-3 height-match">
+          <Row className="mt-1 p-3 ">
             {view}
           </Row>
           </Col>

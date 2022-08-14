@@ -13,7 +13,13 @@ class UsersController < ApplicationController
     else 
       render json: [error: "Not Authorized , please login."] , status: :unauthorized
     end 
+  end
 
+  def destroy
+    if current_user && current_user.id == params[:user_id].to_i
+      current_user.destroy
+      head :no_content
+    end
   end
   
   private

@@ -12,9 +12,9 @@ const Homepage = ({user, showModal, handleClose , handleShow , setUser , errors 
             <Link to="/signup" className='text-danger opacity-75 ms-3' exact={true}>Not a user? Sign up here.</Link> 
             <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser} errors={errors} setErrors={setErrors}  setIsAuthenticated={ setIsAuthenticated}/>
   </>
-  const helloMessage = <h3 className="text-danger"><strong>Welcome {user.username}!</strong></h3>
+  
 
-  const message = !isAuthenticated ? login : helloMessage
+  
   return (
     <Container className='align-text-center py-5'>
     
@@ -30,7 +30,7 @@ const Homepage = ({user, showModal, handleClose , handleShow , setUser , errors 
               <strong> For Both Users.</strong>
               <br/>
             </p>
-           {message}
+            <h3 className="text-danger"><strong>Welcome {user.username}!</strong></h3>
           </div>
         </div>
         </Col>

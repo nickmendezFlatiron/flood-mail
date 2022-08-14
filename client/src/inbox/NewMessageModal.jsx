@@ -1,8 +1,8 @@
-import React from 'react'
+import {React , useState }from 'react'
 import { Modal , Button , Form , InputGroup, Row} from 'react-bootstrap';
 
 const NewMessageModal = ({setShow , show}) => {
-
+  
   const handleClose = () => setShow(false);
 
   return (
