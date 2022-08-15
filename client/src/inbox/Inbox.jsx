@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
+import Spinner from "react-bootstrap/Spinner"
 
 
 // React Components
@@ -11,14 +12,17 @@ import Toolbar from './Toolbar'
 import InboxTable from './InboxTable'
 import NewMessageModal from './NewMessageModal'
 import Thread from './Thread'
-import InboxTableRow from './InboxTableRow'
+
 
 
 const Inbox = ({navigate , isAuthenticated , user}) => {
   const [emailThreads , setEmailThreads] = useState([])
+  const spinner =    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </Spinner>
 
-  const mainDisplay = {table: <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads}/> , thread: <Thread />}
-  const [view , setView] = useState(mainDisplay.table)
+  const mainDisplay = {table: <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads}/> , thread: <Thread />, spinner: spinner}
+  const [view , setView] = useState(mainDisplay.spinner)
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   
@@ -35,13 +39,13 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
       if (r.ok) {
         r.json().then(emailThreads => {
           setEmailThreads([...emailThreads])
-          setView(mainDisplay.table)
         })
       }
     })
   } ,[])
   
-debugger
+  
+
   return (
     <Container className="my-4 border border-3 rounded">
         <Row className="">

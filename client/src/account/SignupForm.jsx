@@ -40,9 +40,9 @@ const SignupForm = ({setShowModal, setUser , errors , setErrors , showModal , ha
 
     const isEmpty = Object.values({username , password , passwordConfirmation}).filter(key => key.length === 0 )
 
-    // if(isEmpty.length > 0 ) {
-    //   return setErrors(["Required field(s) blank"])
-    // }
+    if(isEmpty.length > 0 ) {
+      return setErrors(["Required field(s) blank"])
+    }
 
     fetch("/signup" , {
       method: "POST" ,
@@ -60,6 +60,7 @@ const SignupForm = ({setShowModal, setUser , errors , setErrors , showModal , ha
               setPasswordConfirmation("")
               setEmail("")
               navigate("/account")
+              setIsAuthenticated(true)
             })
           } else {
             r.json().then(r => setErrors(r.errors))

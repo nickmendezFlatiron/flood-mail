@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :username , presence: true , uniqueness: true , format: {with: /[a-zA-Z0-9_-]/ , message: "may include alphanumeric characters , dashes - , and underscores _"} , length: {maximum: 30 , too_long: "30 characters is the maximum allowed"}
   validates :password , confirmation: true , presence: true
   validates :password_confirmation , presence: true
-  validates :email , format: {with: /[a-zA-Z0-9@.]/ , message: "may only include alphanumeric characters or @"}
+  validates :email , format: {with: /[a-zA-Z0-9@.]|(^$)/ , message: "may only include alphanumeric characters or @"}
 
   # THIS IS FOR CONFIRMING A CONTACT
   # validates :is_a_user 
