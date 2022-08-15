@@ -43,14 +43,14 @@
 }
 
 .sender {
-  display: inline-block;
+  /* display: inline-block; */
   /* align-items: flex-end; */
   float: right;
-  text-align: end;
-  background-color: rgb(227, 227, 227);
+  text-align: start;
   width: 35vw;
- border: rgb(222, 222, 222);
- border-style: solid;
+  background-color: rgba(180, 230, 180, 0.482);
+  border: rgb(199, 235, 200);
+  border-style: solid;
 }
 
 .receiver {
@@ -58,8 +58,12 @@
   align-content: flex-start;
   text-align: start;
   flex-direction: row;
-  background-color: rgb(180, 230, 180);
+  background-color: rgba(216, 216, 216, 0.284);
+  border: rgb(230, 230, 230);
   width: 35vw;
-  border: rgb(185, 235, 185);
   border-style: solid;
+}
+
+.sender h6 {
+  text-align: end;
 }
