@@ -9,14 +9,20 @@ import Spinner from 'react-bootstrap/Spinner';
 
 
 
-const Account = ({user , isAuthenticated , navigate}) => {
+const Account = ({user , isAuthenticated , setUser , navigate , setIsAuthenticated}) => {
   const [quote , setQuote] = useState("")
   const [onFade , toggleFade] = useState(false)
   const {message_count , email_thread_count , contacts} = user
   
   function handleClick(){
     if (window.confirm(`Burning your account is not reversible.Please confirm that you want to burn your account.`)) {
-        fetch(`/users/${user.id}` , {method: "DELETE"})
+        fetch(`/users/${user.id}` , {method: "DELETE"}).then(r => {
+          if (r.ok) { 
+            setIsAuthenticated(false)
+            setUser({})
+            navigate("/signup")
+          }
+        })
 
     }else {console.log("exited")}
   }

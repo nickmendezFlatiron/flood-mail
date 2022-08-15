@@ -16,8 +16,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if current_user && current_user.id == params[:user_id].to_i
+
+    if current_user 
       current_user.destroy
+      session.delete :current_user
       head :no_content
     end
   end
