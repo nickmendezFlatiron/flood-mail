@@ -33,11 +33,11 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
       method: "POST" ,
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(newThread) 
-    }) .then(r=> {
+    }).then(r=> {
       if(r.ok) {
         r.json().then(thread => {
           console.log(thread)
-          setEmailThreads([thread,...emailThreads])
+          setEmailThreads(t => [thread,...emailThreads])
           setUsername("")
           setSubject("")
           setMessage("")
@@ -70,7 +70,7 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
             />
           </InputGroup>
           <InputGroup className="mb-3">
-            {/* <InputGroup.Text id="basic-addon2">Subject: </InputGroup.Text> */}
+            <InputGroup.Text id="basic-addon2" className="text-muted">{50 - subject.length}</InputGroup.Text>
             <Form.Control
               placeholder="Subject Line"
               aria-label="Subject"

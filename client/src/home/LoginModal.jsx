@@ -38,7 +38,7 @@ const LoginModal = ({handleClose , showModal , setUser , errors , setErrors ,  s
       method: "POST" ,
       headers: {"Content-Type": "application/json"} ,
       body: JSON.stringify(loginInfo)
-    }) .then(r => {
+    }).then(r => {
       // console.log(r)
       if (r.ok) {
         r.json().then(user => {

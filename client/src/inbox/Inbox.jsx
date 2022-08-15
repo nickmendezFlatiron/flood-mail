@@ -16,8 +16,9 @@ import Thread from './Thread'
 
 
 const Inbox = ({navigate , isAuthenticated , user}) => {
-  
+
   const [emailThreads , setEmailThreads] = useState([])
+
   const spinner =    <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
                       </Spinner>
@@ -38,8 +39,9 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
     fetch(`/user/threads`)
     .then(r => {
       if (r.ok) {
-        r.json().then(emailThreads => {
-          setEmailThreads([...emailThreads])
+        r.json().then(emails => {
+          setEmailThreads([...emails])
+         
         })
       }
     })
