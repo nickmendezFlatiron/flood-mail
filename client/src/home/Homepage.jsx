@@ -1,17 +1,14 @@
-import React , {useState} from 'react'
-import { Container , Button , Row , Col , Nav} from 'react-bootstrap'
-import LoginModal from './LoginModal';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 import image from "../assets/logo.png"
 
-const Homepage = ({user, showModal, handleClose , handleShow , setUser , errors , setErrors , setIsAuthenticated , isAuthenticated}) => {
+const Homepage = ({user}) => {
 
   
-  const login = <>
-            <Button className="btn btn-danger btn-lg" onClick={handleShow}>Login</Button>
-            <Link to="/signup" className='text-danger opacity-75 ms-3' exact={true}>Not a user? Sign up here.</Link> 
-            <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser} errors={errors} setErrors={setErrors}  setIsAuthenticated={ setIsAuthenticated}/>
-  </>
+
   
 
   

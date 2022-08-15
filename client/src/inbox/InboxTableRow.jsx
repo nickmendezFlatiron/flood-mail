@@ -1,6 +1,6 @@
-import {React , useState}from 'react'
+import {React }from 'react'
 
-import Thread from './Thread'
+
 
 const InboxTableRow = ({thread , user}) => {
 

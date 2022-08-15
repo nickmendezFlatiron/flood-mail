@@ -53,14 +53,14 @@ const SignupForm = ({setShowModal, setUser , errors , setErrors , showModal , ha
         
           if (r.ok) {
             r.json().then(user =>{
-              console.log(user)
+              
               setUser(user)
               setUsername("")
               setPassword("")
               setPasswordConfirmation("")
               setEmail("")
-              navigate("/account")
               setIsAuthenticated(true)
+              navigate("/account")
             })
           } else {
             r.json().then(r => setErrors(r.errors))

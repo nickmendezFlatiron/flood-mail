@@ -16,6 +16,7 @@ import Thread from './Thread'
 
 
 const Inbox = ({navigate , isAuthenticated , user}) => {
+  
   const [emailThreads , setEmailThreads] = useState([])
   const spinner =    <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
