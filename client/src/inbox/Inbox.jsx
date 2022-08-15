@@ -41,7 +41,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
     })
   } ,[])
   
-
+debugger
   return (
     <Container className="my-4 border border-3 rounded">
         <Row className="">

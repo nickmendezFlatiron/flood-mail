@@ -12,6 +12,7 @@ const InboxTableRow = ({thread , user}) => {
     console.log(e.target.parentNode.id)
   }
 
+
   return (
       <tr id={thread.id} onClick={handleClick}>
         <td>{recipient.username}</td>

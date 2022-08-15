@@ -15,8 +15,6 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
     setUsername(e.target.value)
   }
   function handleSubject(e){
-
-  
     setSubject(e.target.value)
   } 
   function handleMessage(e){
@@ -28,7 +26,7 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
       username, 
       subject, 
       message , 
-      user_id: user.id
+      user_id: user.id 
     } 
 
     fetch("/email_threads", {
@@ -38,6 +36,7 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
     }) .then(r=> {
       if(r.ok) {
         r.json().then(thread => {
+          console.log(thread)
           setEmailThreads([thread,...emailThreads])
           setUsername("")
           setSubject("")
@@ -51,7 +50,7 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
     })
   }
   const renderErrors = errors && errors.map(e => <li>{e}</li>)
-  console.log(errors)
+  
   return (
     <>
       <Modal show={show} onHide={handleClose} className="mt-5">
@@ -83,8 +82,7 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
           </InputGroup>
           <Form.Group>
             <Row className="px-2">
-              <textarea placeholder='Enter message here...' className="rounded-3 border border-2" onChange={handleMessage}>
-              {message}
+              <textarea placeholder='Enter message here...' className="rounded-3 border border-2" onChange={handleMessage} value={message}>
               </textarea>
             </Row>
             
