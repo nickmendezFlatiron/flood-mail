@@ -24,6 +24,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
   const handleShow = () => setShow(true);
   
   function handleClick(e){
+    // console.log(typeof e , e)
     setSelectedThread(e)
     setView("thread")
   }
@@ -31,7 +32,10 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
   function handleThread(){
     setView(() => "table")
   }
-  const renderThread = <Thread selectedThread={selectedThread}/> 
+
+  // const filteredThread = emailThreads.filter(e => e.id === parseInt(selectedThread))
+  // console.log({filteredThread})
+  const renderThread = <Thread selectedThread={selectedThread} user={user}/> 
   const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads} setSelectedThread={setSelectedThread}/>
   const renderSpinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
   
@@ -55,7 +59,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
   return (
     <Container className="my-4 border border-3 rounded">
         <Row className="">
-          <Col className="border-end border-3 pt-3 d-flex flex-column bg-light height-match" md={2}>
+          <Col className="border-end border-3 pt-3 d-flex flex-column bg-light " md={2}>
            
             <Button onClick={handleShow} className="btn-danger shadow">New Message</Button>
             <NewMessageModal show={show} setShow={setShow} user={user} emailThreads={emailThreads} setEmailThreads={setEmailThreads}/>

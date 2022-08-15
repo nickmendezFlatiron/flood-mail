@@ -26,7 +26,7 @@ class EmailThreadsController < ApplicationController
   def show 
     if current_user
       thread = EmailThread.find(params[:id])
-      render json: thread ,status: :ok
+      render json: thread , serializer: UserEmailThreadSerializer ,  status: :ok
     end
   end
 

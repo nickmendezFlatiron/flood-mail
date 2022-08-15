@@ -43,6 +43,23 @@
 }
 
 .sender {
-  flex-direction: row-reverse;
+  display: inline-block;
+  /* align-items: flex-end; */
+  float: right;
+  text-align: end;
+  background-color: rgb(227, 227, 227);
+  width: 35vw;
+ border: rgb(222, 222, 222);
+ border-style: solid;
+}
+
+.receiver {
+  display: inline-block;
+  align-content: flex-start;
   text-align: start;
+  flex-direction: row;
+  background-color: rgb(180, 230, 180);
+  width: 35vw;
+  border: rgb(185, 235, 185);
+  border-style: solid;
 }
