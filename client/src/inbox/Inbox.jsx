@@ -18,36 +18,39 @@ import Thread from './Thread'
 const Inbox = ({navigate , isAuthenticated , user}) => {
 
   const [emailThreads , setEmailThreads] = useState([])
-
-  const spinner =    <Spinner animation="border" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                      </Spinner>
-
-  const mainDisplay = {table: <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads}/> , thread: <Thread />, spinner: spinner}
-  const [view , setView] = useState(mainDisplay.spinner)
+  const [view , setView] = useState("spinner")
   const [show, setShow] = useState(false);
+  const [selectedThread , setSelectedThread] = useState(null)
   const handleShow = () => setShow(true);
   
-
   function handleClick(e){
-    if(e.target.innerText === "Threads") {
-      setView(mainDisplay.table)
-    }
+    setSelectedThread(e)
+    setView("thread")
   }
-
+  
+  function handleThread(){
+    setView(() => "table")
+  }
+  const renderThread = <Thread selectedThread={selectedThread}/> 
+  const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads} setSelectedThread={setSelectedThread}/>
+  const renderSpinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
+  
   useEffect(()=> {
     fetch(`/user/threads`)
     .then(r => {
       if (r.ok) {
         r.json().then(emails => {
           setEmailThreads([...emails])
-         
-        })
-      }
+          // console.log(emailThreads)
+          setView(()=> "table")
+        }) 
+      } 
     })
   } ,[])
   
-  
+  const selectComponent = view === "table" ? renderTable : renderThread
+  const display = view === "spinner" ? renderSpinner : selectComponent
+
 
   return (
     <Container className="my-4 border border-3 rounded">
@@ -57,7 +60,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
             <Button onClick={handleShow} className="btn-danger shadow">New Message</Button>
             <NewMessageModal show={show} setShow={setShow} user={user} emailThreads={emailThreads} setEmailThreads={setEmailThreads}/>
             <hr />
-            <Button variant="link" className="text-danger align-self-start" onClick={handleClick}>Threads</Button>
+            <Button variant="link" className="text-danger align-self-start" onClick={handleThread}>Threads</Button>
             <br />
             <Button variant="link" className="text-danger align-self-start">Dropdown</Button>
             <br />
@@ -68,7 +71,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
             <Toolbar/>
           </Row>
           <Row className="mt-1 p-3 ">
-            {view}
+            {display}
           </Row>
           </Col>
         </Row>

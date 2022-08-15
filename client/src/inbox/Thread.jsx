@@ -3,8 +3,18 @@ import React from 'react'
 import ThreadMessage from './ThreadMessage'
 
 import { Container } from 'react-bootstrap'
+import { useEffect } from 'react'
 
-const Thread = () => {
+const Thread = ({selectedThread}) => {
+
+  useEffect(()=>{
+    fetch(`/email_threads/${selectedThread}`)
+      .then(r=>{
+        if(r.ok) {
+          r.json().then(console.log)
+        }
+      })
+  },[])
   return (
     <Container>
       <h6>From:</h6>

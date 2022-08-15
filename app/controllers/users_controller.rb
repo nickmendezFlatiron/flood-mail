@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def destroy
 
     if current_user 
+      current_user.email_threads.each {|e| e.destroy}
       current_user.destroy
       session.delete :current_user
       head :no_content

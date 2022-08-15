@@ -2,9 +2,9 @@ import {React }from 'react'
 
 
 
-const InboxTableRow = ({thread , user}) => {
+const InboxTableRow = ({thread , user, setSelectedThread, handleClick}) => {
 
-  debugger
+  
   const recipient = thread.users.find(u => u.username !== user.username)
   
   const time = new Date(thread.created_at).toString().split(" ").splice(0,5).join(" ")
@@ -12,12 +12,13 @@ const InboxTableRow = ({thread , user}) => {
   
   const message = thread.latest_message
 
- function handleClick(e) {
-    console.log(e.target.parentNode.id)
+ function handleThread(e) {
+    setSelectedThread(e.target.parentNode.id)
+    handleClick(e.target.parentNode.id)
   }
   
   return (
-      <tr  id={thread.id} onClick={handleClick}>
+      <tr  id={thread.id} onClick={handleThread}>
         <td>{recipient.username}</td>
         <td><strong>{thread.subject}</strong></td>
         <td>{message}</td>
