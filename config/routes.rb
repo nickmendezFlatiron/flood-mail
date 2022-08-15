@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :email_threads , only: [:show]
-  # resources :messages
+  resources :email_threads , only: [:show , :create]
+
+  #Messages Controller
+  resources :messages , only: [:create]
 
   # Sessions Controller
   post "/login", to: "sessions#login"

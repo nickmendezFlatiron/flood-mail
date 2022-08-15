@@ -48,7 +48,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
           <Col className="border-end border-3 pt-3 d-flex flex-column bg-light height-match" md={2}>
            
             <Button onClick={handleShow} className="btn-danger shadow">New Message</Button>
-            <NewMessageModal show={show} setShow={setShow}/>
+            <NewMessageModal show={show} setShow={setShow} user={user} emailThreads={emailThreads} setEmailThreads={setEmailThreads}/>
             <hr />
             <Button variant="link" className="text-danger align-self-start" onClick={handleClick}>Threads</Button>
             <br />

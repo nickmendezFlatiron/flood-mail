@@ -7,10 +7,15 @@ const InboxTableRow = ({thread , user}) => {
   const time = new Date(thread.created_at).toString().split(" ").splice(0,5).join(" ")
   
   const message = thread.latest_message
+
+ function handleClick(e) {
+    console.log(e.target.parentNode.id)
+  }
+
   return (
-      <tr>
+      <tr id={thread.id} onClick={handleClick}>
         <td>{recipient.username}</td>
-        <td>{thread.subject}</td>
+        <td><strong>{thread.subject}</strong></td>
         <td>{message}</td>
         <td>{time}</td>
       </tr>
