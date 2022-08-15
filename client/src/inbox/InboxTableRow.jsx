@@ -4,8 +4,9 @@ import {React }from 'react'
 
 const InboxTableRow = ({thread , user}) => {
 
-  
+  debugger
   const recipient = thread.users.find(u => u.username !== user.username)
+  
   const time = new Date(thread.created_at).toString().split(" ").splice(0,5).join(" ")
   
   

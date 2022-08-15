@@ -9,7 +9,7 @@ const InboxTable = ({emailThreads , user}) => {
 
   let renderThreads = emailThreads.map(thread => <InboxTableRow key={uuid()} user={user} thread={thread}/>)  
 
-  console.log(emailThreads)
+  
   debugger
   return (
     <Table hover >

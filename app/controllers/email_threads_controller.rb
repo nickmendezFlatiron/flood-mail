@@ -12,7 +12,7 @@ class EmailThreadsController < ApplicationController
       
       current_user.save
       recipient.save
-      render json: {thread: thread , message: message} , status: :created
+      render json: thread , status: :created
     else 
       render json: {errors: ["Invalid Message , please try again."]} , status: :unprocessable_entity
 
