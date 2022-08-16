@@ -29,7 +29,7 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
       user_id: user.id 
     } 
 
-    fetch("/email_threads", {
+    fetch("/email_threads",{
       method: "POST" ,
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(newThread) 

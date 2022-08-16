@@ -49,13 +49,11 @@ const SignupForm = ({ navigate ,setUser , errors , setErrors , setIsAuthenticate
       return setErrors(["Required field(s) blank"])
     }
 
-    fetch("/signup" , {
-      method: "POST" ,
-      headers: {"Content-Type": "application/json"} ,
+    fetch("/signup" ,{
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify(newAccount)
-    })
-      .then(r => {
-        
+    }).then(r => {
           if (r.ok) {
             r.json().then(user =>{
               
