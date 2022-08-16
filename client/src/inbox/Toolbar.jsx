@@ -1,22 +1,22 @@
 import React from 'react'
 import {FormControl , InputGroup } from 'react-bootstrap'
 
-const Toolbar = ({messageFormTarget}) => {
+const Toolbar = ({setSearchQuery ,searchQuery}) => {
 
 
 
   function handleFilter(event){
-    
+    setSearchQuery(event.target.value)
   }
   return (
     <>
       <InputGroup size="lg" >
         <FormControl 
-          ref={messageFormTarget} 
+          // ref={messageFormTarget} 
           aria-label="Large" 
           aria-describedby="inputGroup-sizing-sm" 
           placeholder='Search Messages' 
-          value="" 
+          value={searchQuery} 
           onChange={handleFilter}
           />
       </InputGroup>

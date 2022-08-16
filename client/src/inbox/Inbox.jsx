@@ -17,6 +17,7 @@ import Thread from './Thread'
 const Inbox = ({user }) => {
 
   const [emailThreads , setEmailThreads] = useState(null)
+  const [searchQuery, setSearchQuery] = useState("")
   const [view , setView] = useState("spinner")
   const [show, setShow] = useState(false);
   const [selectedThread , setSelectedThread] = useState(null)
@@ -36,10 +37,11 @@ const Inbox = ({user }) => {
     window.location.reload()
   }
 
-  // const filteredThread = emailThreads.filter(e => e.id === parseInt(selectedThread))
-  
+  console.log({emailThreads})
+  const filteredThread = !!emailThreads && emailThreads.filter(t => t.subject.toLowerCase().includes(searchQuery.toLowerCase()) || t.users[0].username.toLowerCase().includes(searchQuery.toLowerCase()) ||t.users[1].username.toLowerCase().includes(searchQuery.toLowerCase()) || t.latest_message.toLowerCase().includes(searchQuery.toLowerCase()))
+  const renderEmailThreadRows = emailThreads?.length > 0 && searchQuery.length > 0 ? filteredThread : emailThreads
   const renderThread = <Thread setView={setView} setEmailThreads={setEmailThreads} selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
-  const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads} setSelectedThread={setSelectedThread}/>
+  const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={renderEmailThreadRows} setSelectedThread={setSelectedThread}/>
   const renderSpinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
   
   useEffect(()=> {
@@ -73,7 +75,7 @@ const Inbox = ({user }) => {
           </Col>
           <Col className="pt-3">
           <Row>
-            <Toolbar/>
+            <Toolbar setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
           </Row>
           <Row className="mt-1 pt-3 px-3 overflow-auto inbox-height">
             {display}

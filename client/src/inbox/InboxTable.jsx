@@ -5,7 +5,7 @@ import InboxTableRow from './InboxTableRow'
 
 import uuid from "react-uuid"
 
-const InboxTable = ({emailThreads , user , setSelectedThread , handleClick}) => {
+const InboxTable = ({emailThreads , user , handleClick}) => {
 
   let renderThreads = emailThreads.map(thread => <InboxTableRow key={uuid()} handleClick={handleClick} user={user} thread={thread} />)  
 
