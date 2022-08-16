@@ -26,7 +26,6 @@
 
 .height-match {
   height: 550px;
-  overflow: auto;
 }
 
 #new-message {
@@ -42,8 +41,12 @@
   font-size: 50px;
 }
 
+#chatbox{
+  height: 100px;
+  overflow: auto;
+}
 .sender {
-  /* display: inline-block; */
+  display: block;
   /* align-items: flex-end; */
   float: right;
   text-align: start;
@@ -67,3 +70,11 @@
 .sender h6 {
   text-align: end;
 }
+
+.inbox-height {
+  height: 75vh;
+  grid-template-rows:auto 1fr;
+  display: grid;
+  grid-template-columns: 100%;
+}
+

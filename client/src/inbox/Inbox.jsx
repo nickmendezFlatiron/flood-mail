@@ -58,8 +58,8 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
 
   return (
     <Container className="my-4 border border-3 rounded">
-        <Row className="">
-          <Col className="border-end border-3 pt-3 d-flex flex-column bg-light " md={2}>
+        <Row >
+          <Col className="border-end border-3 pt-3 d-flex flex-column bg-light" md={2}>
            
             <Button onClick={handleShow} className="btn-danger shadow">New Message</Button>
             <NewMessageModal show={show} setShow={setShow} user={user} emailThreads={emailThreads} setEmailThreads={setEmailThreads}/>
@@ -74,7 +74,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
           <Row>
             <Toolbar/>
           </Row>
-          <Row className="mt-1 p-3 ">
+          <Row className="mt-1 p-3 overflow-auto inbox-height">
             {display}
           </Row>
           </Col>

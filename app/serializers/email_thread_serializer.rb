@@ -5,6 +5,8 @@ class EmailThreadSerializer < ActiveModel::Serializer
   has_many :users
 
   def latest_message
-    self.object.messages.last.body.truncate(33)
+    if self.object.messages.last
+      self.object.messages.last.body.truncate(33)
+    end
   end
 end

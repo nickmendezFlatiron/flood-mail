@@ -27,7 +27,8 @@ function App() {
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-
+  const randomArr = Math.floor(Math.random() * 1643) + 1;
+  
   useEffect(() => {
     // user auto-login
     fetch("/authorize")
@@ -47,7 +48,7 @@ function App() {
       <Navigation user={user} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}  setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>
       <Routes>
         <Route path="/" exact={true} element={<Homepage user={user}/>} />
-        <Route path="/account" exact={true} element={<Account setUser={setUser} user={user} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />
+        <Route path="/account" exact={true} element={<Account randomArr={randomArr} setUser={setUser} user={user} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />
         <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate} isAuthenticated={isAuthenticated}/>}/>
         {/* <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/> */}
       </Routes>
