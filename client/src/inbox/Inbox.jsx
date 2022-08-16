@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row'
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import Spinner from "react-bootstrap/Spinner"
-import { Navigate } from "react-router-dom"
 
 // React Components
 import Toolbar from './Toolbar'
@@ -15,9 +14,9 @@ import Thread from './Thread'
 
 
 
-const Inbox = ({user , navigate}) => {
+const Inbox = ({user }) => {
 
-  const [emailThreads , setEmailThreads] = useState([])
+  const [emailThreads , setEmailThreads] = useState(null)
   const [view , setView] = useState("spinner")
   const [show, setShow] = useState(false);
   const [selectedThread , setSelectedThread] = useState(null)
@@ -39,7 +38,7 @@ const Inbox = ({user , navigate}) => {
 
   // const filteredThread = emailThreads.filter(e => e.id === parseInt(selectedThread))
   
-  const renderThread = <Thread navigate={navigate} selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
+  const renderThread = <Thread setView={setView} setEmailThreads={setEmailThreads} selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
   const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads} setSelectedThread={setSelectedThread}/>
   const renderSpinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
   
@@ -48,9 +47,9 @@ const Inbox = ({user , navigate}) => {
     .then(r => {
       if (r.ok) {
         r.json().then(emails => {
-          setView("table")
           setEmailThreads([...emails])
-          // console.log(emailThreads)
+          setView("table")
+
         }) 
       } 
     })
@@ -69,8 +68,6 @@ const Inbox = ({user , navigate}) => {
             <NewMessageModal show={show} setShow={setShow} user={user} emailThreads={emailThreads} setEmailThreads={setEmailThreads}/>
             <hr />
             <Button variant="link" className="text-danger align-self-start" onClick={handleThread}>Threads</Button>
-            <br />
-            <Button variant="link" className="text-danger align-self-start">Dropdown</Button>
             <br />
             <Button variant="link"className="text-danger align-self-start">Contact List</Button>
           </Col>

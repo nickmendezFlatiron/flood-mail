@@ -1,5 +1,5 @@
 class EmailThreadSerializer < ActiveModel::Serializer
-  attributes :id, :subject ,:created_at, :latest_message
+  attributes :id, :subject ,:message_count , :latest_message , :updated_at
 
   # has_many :messages
   has_many :users

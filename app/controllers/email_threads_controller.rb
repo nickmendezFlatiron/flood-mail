@@ -18,7 +18,7 @@ class EmailThreadsController < ApplicationController
   
   def index
     if current_user
-      email_threads = current_user.email_threads.order(id: :desc)    
+      email_threads = current_user.email_threads.order(updated_at: :desc)    
       render json: email_threads , status: :ok
     end
   end

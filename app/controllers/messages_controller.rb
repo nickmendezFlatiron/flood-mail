@@ -3,6 +3,8 @@ class MessagesController < ApplicationController
   def create
     if current_user
       message = current_user.messages.create!(message_params)
+      email_thread = EmailThread.find(params[:email_thread_id])
+      email_thread.update(message_count: email_thread[:message_count] + 1)
       render json: message , status: :created
     end
   end

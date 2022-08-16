@@ -10,16 +10,15 @@ import CloseButton from 'react-bootstrap/CloseButton';
 
 import uuid from 'react-uuid'
 
-const Thread = ({emailThreads , selectedThread , user , navigate}) => {
+const Thread = ({emailThreads , selectedThread , user , setView , setEmailThreads }) => {
 
   const [threadInfo, setThreadInfo] = useState([])
   const [newMessage , setNewMessage] = useState("")
   const scrollRef = useRef()
+  const topRef = useRef()
   const scroll = () => setTimeout(function(){scrollRef.current.scrollIntoView({behavior: "smooth", block: "end"})} , 250)
 
   const recipient = threadInfo.users  && threadInfo.users.filter(u => u.username !== user.username)
-
-  const updateThreadInfo = emailThreads.filter(t => t.id === parseInt(selectedThread))
   
   useEffect(()=>{
     fetch(`/email_threads/${selectedThread}`)
@@ -38,14 +37,18 @@ const Thread = ({emailThreads , selectedThread , user , navigate}) => {
   }
 
   function handleDeleteThread(){
-
     if(window.confirm("Do you want to delete this thread?")) {
       fetch(`/email_threads/${selectedThread}`, {method: "DELETE"})
         .then (r => {if(r.ok){
-          window.location.reload()
+          const removedThread= emailThreads.filter(t => t.id !== parseInt(selectedThread))
+          setEmailThreads([...removedThread])
+          setView("table")
         }})
-
     }
+  }
+
+  function handleTopScroll() {
+    topRef.current.scrollIntoView({behavior: "smooth", block: "end"})
   }
 
   function handleMessageSubmit(e){
@@ -66,7 +69,6 @@ const Thread = ({emailThreads , selectedThread , user , navigate}) => {
           setThreadInfo({...threadInfo})
           scroll()
           setNewMessage("")
-          updateThreadInfo[0].latest_message = message.body.slice(0 , 30)
         })
       }
     })
@@ -77,7 +79,7 @@ const Thread = ({emailThreads , selectedThread , user , navigate}) => {
   return (
     <Container className="overflow-auto" >
       <Container className="d-flex justify-content-between">
-        <h2>{threadInfo.subject}</h2>
+        <h2 ref={topRef}>{threadInfo.subject}</h2>
         <CloseButton className='fs-5' onClick={handleDeleteThread}></CloseButton>
       </Container>
       <Col>
@@ -93,7 +95,10 @@ const Thread = ({emailThreads , selectedThread , user , navigate}) => {
             placeholder="Enter message Here....."
           >
           </Form.Control>
-        <Button ref={scrollRef} onClick={handleMessageSubmit} className="form-button mt-2 btn-danger">Submit</Button>
+          <Container className="d-flex mt-2  justify-content-between">
+            <Button className="form-button btn-danger" onClick={handleTopScroll}>To Top</Button>
+            <Button ref={scrollRef} onClick={handleMessageSubmit} className="form-button btn-danger">Send</Button>
+          </Container>
         </Form>
       </Col>
     </Container>
