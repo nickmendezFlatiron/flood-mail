@@ -30,6 +30,13 @@ class EmailThreadsController < ApplicationController
     end
   end
 
+  def destroy
+      thread = EmailThread.find(params[:id])
+      thread.destroy
+      head :no_content
+
+  end
+
   def email_thread_params
     params.permit(:message , :username , :user_id , :subject)
   end

@@ -15,7 +15,7 @@ import Thread from './Thread'
 
 
 
-const Inbox = ({user}) => {
+const Inbox = ({user , navigate}) => {
 
   const [emailThreads , setEmailThreads] = useState([])
   const [view , setView] = useState("spinner")
@@ -26,9 +26,8 @@ const Inbox = ({user}) => {
   function handleClick(e){
     
     if (e.target !== "tr") {
-      
-      setSelectedThread(e.target.parentNode.id)
       setView("thread")
+      setSelectedThread(e.target.parentNode.id)
     }
   //  console.log(e)
   }
@@ -40,7 +39,7 @@ const Inbox = ({user}) => {
 
   // const filteredThread = emailThreads.filter(e => e.id === parseInt(selectedThread))
   
-  const renderThread = <Thread selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
+  const renderThread = <Thread navigate={navigate} selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
   const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads} setSelectedThread={setSelectedThread}/>
   const renderSpinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
   
@@ -49,9 +48,9 @@ const Inbox = ({user}) => {
     .then(r => {
       if (r.ok) {
         r.json().then(emails => {
+          setView("table")
           setEmailThreads([...emails])
           // console.log(emailThreads)
-          setView(()=> "table")
         }) 
       } 
     })

@@ -55,7 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage user={user}/>} />
         <Route path="/account" exact={true} element={<Account setUser={setUser} user={user}  setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />
-        <Route path="/inbox" exact={true} element={<Inbox user={user}/>}/>
+        <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate}/>}/>
         {/* <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/> */}
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>

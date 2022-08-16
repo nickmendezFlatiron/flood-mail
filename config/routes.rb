@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :email_threads , only: [:show , :create]
+  resources :email_threads , only: [:show , :create ,:destroy]
 
   #Messages Controller
   resources :messages , only: [:create , :destroy]

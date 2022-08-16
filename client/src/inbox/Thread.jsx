@@ -5,12 +5,12 @@ import ThreadMessage from './ThreadMessage'
 import  Container  from 'react-bootstrap/Container'
 import Button from "react-bootstrap/Button"
 import Col from 'react-bootstrap/Col'
-
 import Form from "react-bootstrap/Form"
+import CloseButton from 'react-bootstrap/CloseButton';
 
 import uuid from 'react-uuid'
 
-const Thread = ({emailThreads , selectedThread , user}) => {
+const Thread = ({emailThreads , selectedThread , user , navigate}) => {
 
   const [threadInfo, setThreadInfo] = useState([])
   const [newMessage , setNewMessage] = useState("")
@@ -20,7 +20,7 @@ const Thread = ({emailThreads , selectedThread , user}) => {
   const recipient = threadInfo.users  && threadInfo.users.filter(u => u.username !== user.username)
 
   const updateThreadInfo = emailThreads.filter(t => t.id === parseInt(selectedThread))
-  // console.log(updateThreadInfo)
+  
   useEffect(()=>{
     fetch(`/email_threads/${selectedThread}`)
     .then(r=>{
@@ -29,11 +29,23 @@ const Thread = ({emailThreads , selectedThread , user}) => {
           setThreadInfo(r)
         })
       }
-    }).then(scroll())
+    })
+    .then(scroll())
   },[selectedThread])
 
   function handleNewMessage(e) {
     setNewMessage(e.target.value)
+  }
+
+  function handleDeleteThread(){
+
+    if(window.confirm("Do you want to delete this thread?")) {
+      fetch(`/email_threads/${selectedThread}`, {method: "DELETE"})
+        .then (r => {if(r.ok){
+          window.location.reload()
+        }})
+
+    }
   }
 
   function handleMessageSubmit(e){
@@ -64,7 +76,10 @@ const Thread = ({emailThreads , selectedThread , user}) => {
  
   return (
     <Container className="overflow-auto" >
-      <h2>{threadInfo.subject}</h2>
+      <Container className="d-flex justify-content-between">
+        <h2>{threadInfo.subject}</h2>
+        <CloseButton className='fs-5' onClick={handleDeleteThread}></CloseButton>
+      </Container>
       <Col>
      {displayMessages}
       </Col>
