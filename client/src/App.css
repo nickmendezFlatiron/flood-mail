@@ -45,6 +45,7 @@
   height: 100px;
   overflow: auto;
 }
+
 .sender {
   display: block;
   /* align-items: flex-end; */

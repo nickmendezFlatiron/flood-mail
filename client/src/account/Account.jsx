@@ -9,7 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 
 
-const Account = ({randomArr , user , isAuthenticated , setUser , navigate , setIsAuthenticated}) => {
+const Account = ({user , isAuthenticated , setUser , navigate , setIsAuthenticated}) => {
   const [quote , setQuote] = useState("")
   const [onFade , toggleFade] = useState(false)
   const {message_count , email_thread_count , contacts} = user
@@ -30,6 +30,7 @@ const Account = ({randomArr , user , isAuthenticated , setUser , navigate , setI
     fetch(`https://type.fit/api/quotes`)
     .then(r => r.json())
     .then(quote => {
+      const randomArr = Math.floor(Math.random() * 1643) + 1;
       setQuote(quote[randomArr])})
       toggleFade(true)
     } , [])
