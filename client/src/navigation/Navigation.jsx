@@ -9,7 +9,7 @@ import Notifications from './Notifications'
 // import LoginModal from '../home/LoginModal'
 
 
-const Navigation = ({user, setUser ,  setIsAuthenticated , isAuthenticated}) => {
+const Navigation = ({user, setUser ,  setIsAuthenticated }) => {
   
   return (
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">

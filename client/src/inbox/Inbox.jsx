@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import Spinner from "react-bootstrap/Spinner"
-
+import { Navigate } from "react-router-dom"
 
 // React Components
 import Toolbar from './Toolbar'
@@ -15,7 +15,7 @@ import Thread from './Thread'
 
 
 
-const Inbox = ({navigate , isAuthenticated , user}) => {
+const Inbox = ({user}) => {
 
   const [emailThreads , setEmailThreads] = useState([])
   const [view , setView] = useState("spinner")
@@ -24,18 +24,23 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
   const handleShow = () => setShow(true);
   
   function handleClick(e){
-    // console.log(typeof e , e)
-    setSelectedThread(e)
-    setView("thread")
+    
+    if (e.target !== "tr") {
+      
+      setSelectedThread(e.target.parentNode.id)
+      setView("thread")
+    }
+  //  console.log(e)
   }
   
   function handleThread(){
-    setView(() => "table")
+    // setView(() => "table")
+    window.location.reload()
   }
 
   // const filteredThread = emailThreads.filter(e => e.id === parseInt(selectedThread))
-  // console.log({filteredThread})
-  const renderThread = <Thread selectedThread={selectedThread} user={user}/> 
+  
+  const renderThread = <Thread selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
   const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={emailThreads} setSelectedThread={setSelectedThread}/>
   const renderSpinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
   

@@ -1,5 +1,5 @@
 import {React , Fragment, useState, useEffect } from "react";
-import { Routes , Route , useNavigate} from "react-router-dom";
+import { Routes , Route , useNavigate , Navigate} from "react-router-dom";
 
 
 // CSS Styling
@@ -20,20 +20,19 @@ import Spinner from "react-bootstrap/Spinner"
 
 function App() {
  const [user , setUser] = useState({})
- const [showModal, setShowModal] = useState(false);
+ 
  const [isAuthenticated , setIsAuthenticated] = useState(null)
  const [errors , setErrors] = useState([])
 
  const navigate = useNavigate()
 
-  const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
+  
 
   const spinner =    <Spinner animation="border" role="status">
                       <span className="visually-hidden">Loading...</span>
                     </Spinner>
 
-  console.log({isAuthenticated})
+  
   useEffect(() => {
     // user auto-login
     fetch("/authorize")
@@ -45,19 +44,20 @@ function App() {
   })}
   , []);
 
-  const renderSignup = <SignupForm setShowModal={setShowModal} isAuthenticated={isAuthenticated} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors}/>
+  const renderSignup = <SignupForm navigate={navigate} isAuthenticated={isAuthenticated} setUser={setUser} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors}/>
 
   if(isAuthenticated === null) return spinner
   if (!isAuthenticated) return  renderSignup
 
   return (
     <Fragment >
-      <Navigation user={user} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow}  setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated}/>
+      <Navigation user={user} setUser={setUser}  setIsAuthenticated={setIsAuthenticated} />
       <Routes>
-        <Route path="/" exact={true} element={<Homepage user={user}/>} />
-        <Route path="/account" exact={true} element={<Account setUser={setUser} user={user} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />
-        <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate} isAuthenticated={isAuthenticated}/>}/>
+        <Route path="/" element={<Homepage user={user}/>} />
+        <Route path="/account" exact={true} element={<Account setUser={setUser} user={user}  setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />
+        <Route path="/inbox" exact={true} element={<Inbox user={user}/>}/>
         {/* <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/> */}
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </Fragment>
   );

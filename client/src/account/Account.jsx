@@ -9,7 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 
 
-const Account = ({user , isAuthenticated , setUser , navigate , setIsAuthenticated}) => {
+const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
   const [quote , setQuote] = useState("")
   const [onFade , toggleFade] = useState(false)
   const {message_count , email_thread_count , contacts} = user
@@ -24,7 +24,7 @@ const Account = ({user , isAuthenticated , setUser , navigate , setIsAuthenticat
           }
         })
 
-    }else {console.log("exited")}
+    }
   }
   useEffect(() => {
     fetch(`https://type.fit/api/quotes`)
@@ -54,7 +54,7 @@ const Account = ({user , isAuthenticated , setUser , navigate , setIsAuthenticat
           <Button className='mb-4' variant='danger' onClick={handleClick} >Burn My Account</Button>
         </Col>
         <Col className="d-flex align-items-center opacity-75 text-center" >
-          <Fade in={onFade}  >
+          <Fade in={onFade} mountOnEnter={true} >
             <p id="quote"><em>{quote.text}</em></p>
           </Fade>
         </Col>

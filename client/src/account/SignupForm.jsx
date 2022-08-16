@@ -1,20 +1,25 @@
 import React , {useState , useEffect} from 'react'
 import { Container, Row, Col, Form, Button , Fade } from 'react-bootstrap'
-import { useNavigate , Link } from 'react-router-dom'
+import {  Link } from 'react-router-dom'
 
 import LoginModal from '../home/LoginModal'
 import uuid from "react-uuid"
 
-const SignupForm = ({ setUser , errors , setErrors , showModal , handleClose , setIsAuthenticated , handleShow}) => {
+const SignupForm = ({ navigate ,setUser , errors , setErrors , setIsAuthenticated }) => {
 
   const [onTransition , toggleTransition] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  // Form State
   const [username , setUsername] = useState("")
   const [password , setPassword] = useState("")
   const [passwordConfirmation , setPasswordConfirmation] = useState("")
   const [email , setEmail] = useState("")
 
   
-  const navigate = useNavigate()
   // Form Control Functions
   function handleUsername(e) {
     setUsername(e.target.value)

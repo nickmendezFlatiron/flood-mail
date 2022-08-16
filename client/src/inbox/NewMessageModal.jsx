@@ -36,7 +36,7 @@ const NewMessageModal = ({setShow , show , user, emailThreads , setEmailThreads}
     }).then(r=> {
       if(r.ok) {
         r.json().then(thread => {
-          console.log(thread)
+         
           setEmailThreads(t => [thread,...emailThreads])
           setUsername("")
           setSubject("")

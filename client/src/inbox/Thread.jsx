@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form"
 
 import uuid from 'react-uuid'
 
-const Thread = ({selectedThread , user}) => {
+const Thread = ({emailThreads , selectedThread , user}) => {
 
   const [threadInfo, setThreadInfo] = useState([])
   const [newMessage , setNewMessage] = useState("")
@@ -18,6 +18,9 @@ const Thread = ({selectedThread , user}) => {
   const scroll = () => setTimeout(function(){scrollRef.current.scrollIntoView({behavior: "smooth", block: "end"})} , 250)
 
   const recipient = threadInfo.users  && threadInfo.users.filter(u => u.username !== user.username)
+
+  const updateThreadInfo = emailThreads.filter(t => t.id === parseInt(selectedThread))
+  // console.log(updateThreadInfo)
   useEffect(()=>{
     fetch(`/email_threads/${selectedThread}`)
     .then(r=>{
@@ -31,11 +34,10 @@ const Thread = ({selectedThread , user}) => {
 
   function handleNewMessage(e) {
     setNewMessage(e.target.value)
-    console.log(e.target.value)
   }
 
   function handleMessageSubmit(e){
-    e.preventDefault()
+    // e.preventDefault()
     const message = {
       email_thread_id: selectedThread,
       body: newMessage ,
@@ -52,6 +54,7 @@ const Thread = ({selectedThread , user}) => {
           setThreadInfo({...threadInfo})
           scroll()
           setNewMessage("")
+          updateThreadInfo[0].latest_message = message.body.slice(0 , 30)
         })
       }
     })
@@ -75,7 +78,6 @@ const Thread = ({selectedThread , user}) => {
             placeholder="Enter message Here....."
           >
           </Form.Control>
-          {/* <Button variant="danger">Submit</Button> */}
         <Button ref={scrollRef} onClick={handleMessageSubmit} className="form-button mt-2 btn-danger">Submit</Button>
         </Form>
       </Col>
