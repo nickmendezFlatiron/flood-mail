@@ -12,15 +12,16 @@ import Navigation from "./navigation/Navigation"
 import Account from "./account/Account";
 import Inbox from "./inbox/Inbox";
 import SignupForm from "./account/SignupForm";
+import Spinner from "react-bootstrap/Spinner"
 
- 
+
 // import Footer from "./Footer";
 // import uuid from 'react-uuid'
 
 function App() {
  const [user , setUser] = useState({})
  const [showModal, setShowModal] = useState(false);
- const [isAuthenticated , setIsAuthenticated] = useState(false)
+ const [isAuthenticated , setIsAuthenticated] = useState(null)
  const [errors , setErrors] = useState([])
 
  const navigate = useNavigate()
@@ -28,6 +29,11 @@ function App() {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
+  const spinner =    <Spinner animation="border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+
+  console.log({isAuthenticated})
   useEffect(() => {
     // user auto-login
     fetch("/authorize")
@@ -35,12 +41,14 @@ function App() {
         if (r.ok) {
           setIsAuthenticated(true)
           r.json().then(user => setUser(user))
-      }
+      } else {setIsAuthenticated(false)}
   })}
   , []);
 
+  const renderSignup = <SignupForm setShowModal={setShowModal} isAuthenticated={isAuthenticated} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors}/>
 
-  if (!isAuthenticated) return  <SignupForm setShowModal={setShowModal} isAuthenticated={isAuthenticated} setUser={setUser} showModal={showModal} handleClose={handleClose} handleShow={handleShow} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors}/>
+  if(isAuthenticated === null) return spinner
+  if (!isAuthenticated) return  renderSignup
 
   return (
     <Fragment >

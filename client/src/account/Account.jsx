@@ -15,7 +15,7 @@ const Account = ({user , isAuthenticated , setUser , navigate , setIsAuthenticat
   const {message_count , email_thread_count , contacts} = user
   
   function handleClick(){
-    if (window.confirm(`Burning your account is not reversible.Please confirm that you want to burn your account.`)) {
+    if (window.confirm(`Burning your account is not reversible. Please confirm that you want to burn your account.`)) {
         fetch(`/users/${user.id}` , {method: "DELETE"}).then(r => {
           if (r.ok) { 
             setIsAuthenticated(false)

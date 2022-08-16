@@ -57,7 +57,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
 
 
   return (
-    <Container className="my-4 border border-3 rounded">
+    <Container className="mt-4 border border-3 rounded">
         <Row >
           <Col className="border-end border-3 pt-3 d-flex flex-column bg-light" md={2}>
            
@@ -74,7 +74,7 @@ const Inbox = ({navigate , isAuthenticated , user}) => {
           <Row>
             <Toolbar/>
           </Row>
-          <Row className="mt-1 p-3 overflow-auto inbox-height">
+          <Row className="mt-1 pt-3 px-3 overflow-auto inbox-height">
             {display}
           </Row>
           </Col>

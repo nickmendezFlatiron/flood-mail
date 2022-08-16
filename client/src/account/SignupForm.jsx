@@ -5,7 +5,7 @@ import { useNavigate , Link } from 'react-router-dom'
 import LoginModal from '../home/LoginModal'
 import uuid from "react-uuid"
 
-const SignupForm = ({setShowModal, setUser , errors , setErrors , showModal , handleClose , setIsAuthenticated , handleShow}) => {
+const SignupForm = ({ setUser , errors , setErrors , showModal , handleClose , setIsAuthenticated , handleShow}) => {
 
   const [onTransition , toggleTransition] = useState(false)
   const [username , setUsername] = useState("")
@@ -130,7 +130,7 @@ const SignupForm = ({setShowModal, setUser , errors , setErrors , showModal , ha
             <Button variant="danger" type="submit" form="signup-form" >
               Sign Up
             </Button>
-            <Link as={Button} to="/" onClick={handleLogin} className='text-danger opacity-75 ms-3' exact={true}><strong>Have an account? Login here.</strong></Link> 
+            <Link as={Button} to="/" onClick={handleLogin} className='text-danger opacity-75 ms-3' exact="true"><strong>Have an account? Login here.</strong></Link> 
           </Form>
           </Fade>
           <LoginModal handleClose={handleClose} showModal={showModal} setUser={setUser} errors={errors} setErrors={setErrors}  setIsAuthenticated={ setIsAuthenticated}/>
