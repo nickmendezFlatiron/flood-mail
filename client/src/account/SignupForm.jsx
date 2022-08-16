@@ -64,6 +64,7 @@ const SignupForm = ({ navigate ,setUser , errors , setErrors , setIsAuthenticate
               setEmail("")
               setIsAuthenticated(true)
               navigate("/account")
+              
             })
           } else {
             r.json().then(r => setErrors(r.errors))
@@ -77,6 +78,7 @@ const SignupForm = ({ navigate ,setUser , errors , setErrors , setIsAuthenticate
 
   useEffect(()=>{
     toggleTransition(true)
+    handleShow()
   },[])
   
   function handleLogin(){
