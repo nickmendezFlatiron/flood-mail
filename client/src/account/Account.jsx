@@ -45,8 +45,8 @@ const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
 
    <Container className="my-4 bg-light rounded-3">
       <Row>
-        <Col className="my-5 mx-2 border-bottom rounded bg-white shadow" lg={5}>
-          <h1 id='account-username' className=''>{user.username}</h1>
+        <Col className="my-5 mx-2 border-bottom rounded bg-white shadow fit-content" lg={5}>
+          <h1 id='account-username'>{user.username}</h1>
           <h3 className='mb-5 text-secondary'>{user.email && user.email}</h3>
           <h1 className='pb-2'>Messages: <small className='text-secondary'>{user && message_count}</small></h1>
           <h1 className='pb-2'>Threads: <small className='text-secondary'>{user && email_thread_count}</small></h1>

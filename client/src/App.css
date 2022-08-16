@@ -79,3 +79,7 @@
   grid-template-columns: 100%;
 }
 
+
+.fit-content {
+  width: fit-content;
+}
