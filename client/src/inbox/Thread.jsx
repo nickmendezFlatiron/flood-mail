@@ -8,10 +8,12 @@ import Col from 'react-bootstrap/Col'
 import Form from "react-bootstrap/Form"
 import CloseButton from 'react-bootstrap/CloseButton';
 
+import { useOutletContext , useParams } from "react-router-dom";
 import uuid from 'react-uuid'
 
-const Thread = ({emailThreads , selectedThread , user , setView , setEmailThreads }) => {
-
+const Thread = () => {
+  const {setView , setEmailThreads , selectedThread , emailThreads , user} = useOutletContext()
+  const params = useParams()
   const [threadInfo, setThreadInfo] = useState([])
   const [newMessage , setNewMessage] = useState("")
   const scrollRef = useRef()
@@ -21,7 +23,7 @@ const Thread = ({emailThreads , selectedThread , user , setView , setEmailThread
   const recipient = threadInfo.users  && threadInfo.users.filter(u => u.username !== user.username)
   
   useEffect(()=>{
-    fetch(`/email_threads/${selectedThread}`)
+    fetch(`/email_threads/${params.threadId}`)
     .then(r=>{
       if(r.ok) {
         r.json().then(r => {

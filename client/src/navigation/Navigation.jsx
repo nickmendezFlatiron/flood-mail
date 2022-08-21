@@ -20,7 +20,7 @@ const Navigation = ({user, setUser ,  setIsAuthenticated }) => {
       <Container className='justify-content-end text-danger'>
       <Nav>
         <Notifications />
-        <Nav.Link as={Link} to="/inbox" exact={true}>Inbox</Nav.Link>
+        <Nav.Link as={Link} to="/inbox/table" exact={true}>Inbox</Nav.Link>
         <DropDown user={user} setUser={setUser} setIsAuthenticated={setIsAuthenticated}/> 
       </Nav>
       </Container>

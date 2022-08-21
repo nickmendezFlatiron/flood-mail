@@ -1,10 +1,11 @@
 import React , { useState , useEffect} from 'react'
+import {  Outlet, Navigate } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
-import Spinner from "react-bootstrap/Spinner"
+
 
 // React Components
 import Toolbar from './Toolbar'
@@ -14,7 +15,7 @@ import Thread from './Thread'
 
 
 
-const Inbox = ({user }) => {
+const Inbox = ({user , navigate }) => {
 
   const [emailThreads , setEmailThreads] = useState(null)
   const [searchQuery, setSearchQuery] = useState("")
@@ -34,15 +35,14 @@ const Inbox = ({user }) => {
   
   function handleThread(){
     // setView(() => "table")
-    window.location.reload()
+    navigate("/inbox/table")
   }
 
-  console.log({emailThreads})
   const filteredThread = emailThreads?.filter(t => t.subject.toLowerCase().includes(searchQuery.toLowerCase()) || t.users[0].username.toLowerCase().includes(searchQuery.toLowerCase()) ||t.users[1].username.toLowerCase().includes(searchQuery.toLowerCase()) || t.latest_message.toLowerCase().includes(searchQuery.toLowerCase()))
   const renderEmailThreadRows = emailThreads?.length > 0 && searchQuery.length > 0 ? filteredThread : emailThreads
-  const renderThread = <Thread setView={setView} setEmailThreads={setEmailThreads} selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
-  const renderTable = <InboxTable handleClick={handleClick} user={user} emailThreads={renderEmailThreadRows} setSelectedThread={setSelectedThread}/>
-  const renderSpinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
+  // const renderThread = <Thread setView={setView} setEmailThreads={setEmailThreads} selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
+
+  
   
   useEffect(()=> {
     fetch(`/user/threads`)
@@ -57,8 +57,8 @@ const Inbox = ({user }) => {
     })
   } ,[])
   
-  const selectComponent = view === "table" ? renderTable : renderThread
-  const display = view === "spinner" ? renderSpinner : selectComponent
+  // const selectComponent = view === "table" ? <Navigate to="/table" /> : <Navigate to="/thread/:id" />
+  // const display = view === "spinner" ? renderSpinner : selectComponent
 
 
   return (
@@ -78,7 +78,7 @@ const Inbox = ({user }) => {
             <Toolbar setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
           </Row>
           <Row className="mt-1 pt-3 px-3 overflow-auto inbox-height">
-            {display}
+            <Outlet context={{handleClick , user , renderEmailThreadRows , setSelectedThread , setView , setEmailThreads , selectedThread , emailThreads }}/>
           </Row>
           </Col>
         </Row>

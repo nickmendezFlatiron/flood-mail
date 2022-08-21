@@ -11,8 +11,10 @@ import Homepage from "./home/Homepage";
 import Navigation from "./navigation/Navigation"
 import Account from "./account/Account";
 import Inbox from "./inbox/Inbox";
+import Thread from "./inbox/Thread";
 import SignupForm from "./account/SignupForm";
 import Spinner from "react-bootstrap/Spinner"
+import InboxTable from "./inbox/InboxTable";
 
 
 // import Footer from "./Footer";
@@ -55,9 +57,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage user={user}/>} />
         <Route path="/account" exact={true} element={<Account setUser={setUser} user={user}  setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />
-        <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate}/>}/>
+        <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate}/>}> 
+          <Route path="/inbox/table" exact={true} element={<InboxTable />} />
+          <Route path="/inbox/thread/:threadId" element={<Thread /> } />
+        </Route>
         {/* <Route path="/signup" exact={true} element={<SignupForm setUser={setUser} errors={errors} setErrors={setErrors}/>}/> */}
-        <Route path="*" element={<Navigate replace to="/" />} />
+        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
       </Routes>
     </Fragment>
   );
