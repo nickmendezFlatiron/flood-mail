@@ -25,6 +25,7 @@ const Thread = ({navigate}) => {
   useEffect(()=>{
     fetch(`/email_threads/${params.threadId}`)
     .then(r=>{
+      debugger
       if(!r.ok) {navigate("/inbox/table")}
       if(r.ok) {
         r.json().then(r => {

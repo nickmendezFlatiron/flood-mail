@@ -24,9 +24,12 @@ class EmailThreadsController < ApplicationController
   end
 
   def show 
-    if current_user
+    email = EmailThread.find(params[:id])
+    if current_user.email_threads.include?(email)
       thread = EmailThread.find(params[:id])
       render json: thread , serializer: UserEmailThreadSerializer ,  status: :ok
+    else 
+      render json: {errors: ["You do not have access to this thread"]} , status: :unauthorized
     end
   end
 
