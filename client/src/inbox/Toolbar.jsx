@@ -15,7 +15,7 @@ const Toolbar = ({setSearchQuery ,searchQuery}) => {
           // ref={messageFormTarget} 
           aria-label="Large" 
           aria-describedby="inputGroup-sizing-sm" 
-          placeholder='Search Messages' 
+          placeholder='Search Threads....' 
           value={searchQuery} 
           onChange={handleFilter}
           />

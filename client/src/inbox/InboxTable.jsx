@@ -8,9 +8,9 @@ import { useOutletContext } from "react-router-dom";
 import uuid from "react-uuid"
 
 const InboxTable = () => {
-  const {renderEmailThreadRows , user , handleClick} = useOutletContext()
+  const {renderEmailThreadRows , user } = useOutletContext()
   // debugger
-  let renderThreads = renderEmailThreadRows?.map(thread => <InboxTableRow key={uuid()} handleClick={handleClick} user={user} thread={thread} />)  
+  let renderThreads = renderEmailThreadRows?.map(thread => <InboxTableRow key={uuid()} user={user} thread={thread} />)  
   const spinner =  <Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner>
 
   if(!renderEmailThreadRows) return spinner

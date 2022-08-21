@@ -19,28 +19,19 @@ const Inbox = ({user , navigate }) => {
 
   const [emailThreads , setEmailThreads] = useState(null)
   const [searchQuery, setSearchQuery] = useState("")
-  const [view , setView] = useState("spinner")
   const [show, setShow] = useState(false);
-  const [selectedThread , setSelectedThread] = useState(null)
+  
   const handleShow = () => setShow(true);
   
-  function handleClick(e){
-    
-    if (e.target !== "tr") {
-      setView("thread")
-      setSelectedThread(e.target.parentNode.id)
-    }
-  //  console.log(e)
-  }
   
   function handleThread(){
-    // setView(() => "table")
+    
     navigate("/inbox/table")
   }
 
   const filteredThread = emailThreads?.filter(t => t.subject.toLowerCase().includes(searchQuery.toLowerCase()) || t.users[0].username.toLowerCase().includes(searchQuery.toLowerCase()) ||t.users[1].username.toLowerCase().includes(searchQuery.toLowerCase()) || t.latest_message.toLowerCase().includes(searchQuery.toLowerCase()))
   const renderEmailThreadRows = emailThreads?.length > 0 && searchQuery.length > 0 ? filteredThread : emailThreads
-  // const renderThread = <Thread setView={setView} setEmailThreads={setEmailThreads} selectedThread={selectedThread} emailThreads={emailThreads} user={user}/> 
+  
 
   
   
@@ -50,16 +41,11 @@ const Inbox = ({user , navigate }) => {
       if (r.ok) {
         r.json().then(emails => {
           setEmailThreads([...emails])
-          setView("table")
-
         }) 
       } 
     })
   } ,[])
   
-  // const selectComponent = view === "table" ? <Navigate to="/table" /> : <Navigate to="/thread/:id" />
-  // const display = view === "spinner" ? renderSpinner : selectComponent
-
 
   return (
     <Container className="mt-4 border border-3 rounded">
@@ -78,7 +64,7 @@ const Inbox = ({user , navigate }) => {
             <Toolbar setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
           </Row>
           <Row className="mt-1 pt-3 px-3 overflow-auto inbox-height">
-            <Outlet context={{handleClick , user , renderEmailThreadRows , setSelectedThread , setView , setEmailThreads , selectedThread , emailThreads }}/>
+            <Outlet context={{ user , renderEmailThreadRows , setEmailThreads , emailThreads }}/>
           </Row>
           </Col>
         </Row>

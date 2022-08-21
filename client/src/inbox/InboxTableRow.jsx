@@ -2,7 +2,7 @@ import {React }from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-const InboxTableRow = ({thread , user,  handleClick}) => {
+const InboxTableRow = ({thread , user}) => {
 
   const recipient = thread.users.find(u => u.username !== user.username)  
   const time = new Date(thread.updated_at).toString().split(" ").splice(0,5).join(" ")

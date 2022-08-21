@@ -11,8 +11,8 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import { useOutletContext , useParams } from "react-router-dom";
 import uuid from 'react-uuid'
 
-const Thread = () => {
-  const {setView , setEmailThreads , selectedThread , emailThreads , user} = useOutletContext()
+const Thread = ({navigate}) => {
+  const { setEmailThreads , emailThreads , user} = useOutletContext()
   const params = useParams()
   const [threadInfo, setThreadInfo] = useState([])
   const [newMessage , setNewMessage] = useState("")
@@ -25,6 +25,7 @@ const Thread = () => {
   useEffect(()=>{
     fetch(`/email_threads/${params.threadId}`)
     .then(r=>{
+      if(!r.ok) {navigate("/inbox/table")}
       if(r.ok) {
         r.json().then(r => {
           setThreadInfo(r)
@@ -32,7 +33,7 @@ const Thread = () => {
       }
     })
     .then(scroll())
-  },[selectedThread])
+  },[])
 
   function handleNewMessage(e) {
     setNewMessage(e.target.value)
@@ -40,11 +41,11 @@ const Thread = () => {
 
   function handleDeleteThread(){
     if(window.confirm("Do you want to delete this thread?")) {
-      fetch(`/email_threads/${selectedThread}`, {method: "DELETE"})
+      fetch(`/email_threads/${params.threadId}`, {method: "DELETE"})
         .then (r => {if(r.ok){
-          const removedThread= emailThreads.filter(t => t.id !== parseInt(selectedThread))
+          const removedThread= emailThreads.filter(t => t.id !== parseInt(params.threadId))
           setEmailThreads([...removedThread])
-          setView("table")
+          navigate("/inbox/table")
         }})
     }
   }
@@ -56,7 +57,7 @@ const Thread = () => {
   function handleMessageSubmit(e){
     // e.preventDefault()
     const message = {
-      email_thread_id: selectedThread,
+      email_thread_id: params.threadId,
       body: newMessage ,
       user_id: user.id
     }
