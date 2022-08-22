@@ -22,13 +22,9 @@ import InboxTable from "./inbox/InboxTable";
 
 function App() {
  const [user , setUser] = useState({})
- 
  const [isAuthenticated , setIsAuthenticated] = useState(null)
  const [errors , setErrors] = useState([])
-
  const navigate = useNavigate()
-
-  
 
   const spinner =    <Spinner animation="border" role="status">
                       <span className="visually-hidden">Loading...</span>
@@ -58,7 +54,7 @@ function App() {
         <Route path="/" element={<Homepage user={user}/>} />
         <Route path="/account" exact={true} element={<Account setUser={setUser} user={user}  setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />
         <Route path="/inbox" exact={true} element={<Inbox user={user} navigate={navigate}/>}> 
-          <Route path="/inbox/table" exact={true} element={<InboxTable />} />
+          <Route path="/inbox/table" exact={true} element={<InboxTable navigate={navigate}/>} />
           <Route path="/inbox/thread/:threadId" element={<Thread navigate={navigate}/> } />
         </Route>
         <Route path="*" element={<Navigate replace to="/" />} />

@@ -27,12 +27,12 @@ const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
     }
   }
   useEffect(() => {
-    fetch(`https://type.fit/api/quotes`)
+    fetch(`https://the-dune-api.herokuapp.com/quotes`)
     .then(r => r.json())
     .then(quote => {
-      const randomArr = Math.floor(Math.random() * 1643) + 1;
-      setQuote(quote[randomArr])})
-      toggleFade(true)
+      setQuote(quote[0].quote)
+    })
+    .then(toggleFade(true))
     } , [])
     
     const spinner =    <Spinner animation="border" role="status">
@@ -55,7 +55,7 @@ const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
         </Col>
         <Col className="d-flex align-items-center opacity-75 text-center" >
           <Fade in={onFade} mountOnEnter={true} >
-            <p id="quote"><em>{quote.text}</em></p>
+            <p id="quote"><em>{quote}</em></p>
           </Fade>
         </Col>
       </Row>

@@ -3,11 +3,10 @@ import {FormControl , InputGroup } from 'react-bootstrap'
 
 const Toolbar = ({setSearchQuery ,searchQuery}) => {
 
-
-
   function handleFilter(event){
     setSearchQuery(event.target.value)
   }
+  
   return (
     <>
       <InputGroup size="lg" >

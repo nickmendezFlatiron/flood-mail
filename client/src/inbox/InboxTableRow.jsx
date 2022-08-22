@@ -1,12 +1,10 @@
-import {React }from 'react'
-import { useNavigate } from 'react-router-dom'
+import { React }from 'react'
 
-
-const InboxTableRow = ({thread , user}) => {
+const InboxTableRow = ({thread , user , navigate}) => {
 
   const recipient = thread.users.find(u => u.username !== user.username)  
   const time = new Date(thread.updated_at).toString().split(" ").splice(0,5).join(" ")
-  const navigate = useNavigate()
+
   function handleThreadClick(){
     navigate(`/inbox/thread/${thread.id}`)
   }

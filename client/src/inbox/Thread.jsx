@@ -12,6 +12,7 @@ import { useOutletContext , useParams } from "react-router-dom";
 import uuid from 'react-uuid'
 
 const Thread = ({navigate}) => {
+  
   const { setEmailThreads , emailThreads , user} = useOutletContext()
   const params = useParams()
   const [threadInfo, setThreadInfo] = useState([])
@@ -24,14 +25,13 @@ const Thread = ({navigate}) => {
   
   useEffect(()=>{
     fetch(`/email_threads/${params.threadId}`)
-    .then(r=>{
-      debugger
-      if(!r.ok) {navigate("/inbox/table")}
-      if(r.ok) {
-        r.json().then(r => {
-          setThreadInfo(r)
-        })
-      }
+      .then(r=>{
+        if(!r.ok) {navigate("/inbox/table")}
+        if(r.ok) {
+          r.json().then(r => {
+            setThreadInfo(r)
+          })
+        }
     })
     .then(scroll())
   },[])
@@ -56,7 +56,7 @@ const Thread = ({navigate}) => {
   }
 
   function handleMessageSubmit(e){
-    // e.preventDefault()
+    e.preventDefault()
     const message = {
       email_thread_id: params.threadId,
       body: newMessage ,
