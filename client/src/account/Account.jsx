@@ -31,8 +31,9 @@ const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
     .then(r => r.json())
     .then(quote => {
       setQuote(quote[0].quote)
+      toggleFade(true)
     })
-    .then(toggleFade(true))
+    .then()
     } , [])
     
     const spinner =    <Spinner animation="border" role="status">
