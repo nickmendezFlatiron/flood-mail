@@ -8,6 +8,46 @@
 ## Pages/Routes
  ***Note*** : each page features a navigation bar , which features links to the main pages
 
+### 1. Signup Page
+![Signup Page](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/signup.png)
+- Before a flood member has access to the Flood Mail site , a user is prompted to either login or signup to Flood Mail. 
+- Once a member logs in or signs up , they are redirected to their account page and authorized to view the site until they log out.
+
+### 2. Login Page
+![Login Page](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/login.png)
+- Members who already have an account , they are prompted with a login page if they aren't logged in.
+
+### 3.  Home Page
+![Home Page](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/home-page.png)
+- The Home Page features a custom welcome message as well as an introduction to Flood Mail
+
+### 4. Account Page
+![Account Page](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/account-view.png)
+- The Account Page features an overview of a member's account as well as a motivational quote.
+- To delete your account and all associated data , click on the "burn my account" button
+
+### 5. Inbox View
+![Inbox View](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/inbox.png)
+- The Inbox view features all conversations involving signed in flood member.
+- Each row in the inbox is formatted as follows:
+  - recipient username , subject line , latest message , latest message timestamp
+- Search through the inbox using the Searchbar at the top 
+
+### 6. Create A New Thread
+![New Message Thread](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/new-message-modal.png)
+- Click on the new message button to create and send a new message and thread to another Flood Mail member
+
+### 7. Message Thread View
+![Message Thread View Top](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/message-thread-p1.png)
+- Click on a thread in the inbox to view the entire conversation
+- Click on any of the close buttons (x) to delete a message , or delete the entire thread
+
+### 8. Message Thread View Continued
+![Message Thread View Continued](https://github.com/nickmendezFlatiron/flood-mail/blob/main/client/src/assets/message-thread-p2.png)
+- The thread scrolls automatically to the latest message at the bottom
+- Send a new message by entering message on the box at the bottom of the thread and click the send button.
+-  Scroll to the top of the page by clicking the "Top" button.
+
 ### System dependencies
   - ruby 2.7.4p191
   - rails 7 
