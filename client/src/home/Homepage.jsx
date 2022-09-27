@@ -6,11 +6,6 @@ import Col from 'react-bootstrap/Col'
 import image from "../assets/logo.png"
 
 const Homepage = ({user}) => {
-
-  
-
-  
-
   
   return (
     <Container className='align-text-center py-5'>

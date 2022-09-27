@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   #Messages Controller
   resources :messages , only: [:create , :destroy]
+  get '/sortedmessages' , to: "messages#sorted_messages"
 
   # Sessions Controller
   post "/login", to: "sessions#login"
@@ -14,8 +15,8 @@ Rails.application.routes.draw do
   get "/authorize" , to: "users#show"
   
   # Email Threads Controller
-    get "/user/threads", to: "email_threads#index"
+  get "/user/threads", to: "email_threads#index"
     
   
-   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

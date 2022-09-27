@@ -26,20 +26,20 @@ class EmailThreadsController < ApplicationController
   def show 
     email = EmailThread.find(params[:id])
     if current_user.email_threads.include?(email)
-      thread = EmailThread.find(params[:id])
-      render json: thread , serializer: UserEmailThreadSerializer ,  status: :ok
+      render json: email , serializer: UserEmailThreadSerializer ,  status: :ok
     else 
       render json: {errors: ["You do not have access to this thread"]} , status: :unauthorized
     end
   end
 
   def destroy
-      thread = EmailThread.find(params[:id])
-      thread.destroy
-      head :no_content
-
+    thread = EmailThread.find(params[:id])
+    thread.destroy
+    head :no_content
   end
 
+  private 
+  
   def email_thread_params
     params.permit(:message , :username , :user_id , :subject)
   end

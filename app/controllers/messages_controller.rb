@@ -17,6 +17,16 @@ class MessagesController < ApplicationController
     end
   end
 
+  def sorted_messages
+    # retrieve the list of all messages for a user , sorted by ASC
+    if current_user
+      messages = Message.order(body: :asc).pluck("body")
+      render json: messages ,status: :ok
+    end
+    
+  end 
+
+
   private
 
   def message_params
