@@ -3,6 +3,6 @@
 set -o errexit
 
 bundle install
-bundle exec rake assets:precompile
-bundle exec rake assets:clean
-bundle exec rake db:migrate
+rm -rf public
+npm install --prefix client && npm run build --prefix client
+cp -a client/build/. public/
