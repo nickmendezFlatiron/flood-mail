@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   #Messages Controller
   resources :messages , only: [:create , :destroy]
-  get '/sortedmessages' , to: "messages#sorted_messages"
+ 
 
   # Sessions Controller
   post "/login", to: "sessions#login"

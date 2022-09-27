@@ -27,11 +27,7 @@ const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
     }
   }
 
-  function handleAllMessages(){
-    fetch("/sortedmessages")
-      .then(r => r.json())
-    .then(messages => {console.log(messages)})
-  }
+
   useEffect(() => {
     fetch(`https://the-dune-api.herokuapp.com/quotes`)
     .then(r => r.json())
@@ -56,7 +52,6 @@ const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
           <h1 id='account-username'>{user.username}</h1>
           <h3 className='mb-5 text-secondary'>{user.email && user.email}</h3>
           <h1 className='pb-2'>Messages: <small className='text-secondary'>{user && message_count}</small></h1>
-          <Button className='mb-4' variant='danger' onClick={handleAllMessages}>All Messages</Button>
           <h1 className='pb-2'>Threads: <small className='text-secondary'>{user && email_thread_count}</small></h1>
           <h1 className='pb-5'>Contacts: <small className='text-secondary'>{user && contacts.length}</small></h1>
           <Button className='mb-4' variant='danger' onClick={handleClick} >Burn My Account</Button>
