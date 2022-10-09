@@ -49,7 +49,7 @@
 -  Scroll to the top of the page by clicking the "Top" button.
 
 ### System dependencies
-  - ruby 2.7.4p191
+  - ruby 2.7.4
   - rails 7 
   - node v16.14.2
   - react 18

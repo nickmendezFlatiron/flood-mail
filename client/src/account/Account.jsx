@@ -27,16 +27,6 @@ const Account = ({user , setUser , navigate , setIsAuthenticated}) => {
     }
   }
 
-
-  useEffect(() => {
-    fetch(`https://the-dune-api.herokuapp.com/quotes`)
-    .then(r => r.json())
-    .then(quote => {
-      setQuote(quote[0].quote)
-      toggleFade(true)
-    })
-    .then()
-    } , [])
     
     const spinner =    <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
