@@ -38,7 +38,7 @@ const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
   },[alerts, setAlerts, cableApp])
   
   useEffect (()=>{
-    if(!newAlert) {
+    if(!!newAlert) {
       setAlerts([newAlert, ...alerts])
     }
   },[newAlert])
