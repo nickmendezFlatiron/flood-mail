@@ -27,8 +27,7 @@ const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
 
   useEffect(()=>{
     cableApp.notifications = cableApp.cable.subscriptions.create({channel: "AlertChannel"},{
-      received: data => {
-        
+      received: data => { 
         const newAlertRow = {...data.alert}
         newAlertRow.message = data.message 
         newAlertRow.message.creator = data.creator
@@ -38,8 +37,10 @@ const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
   },[alerts, setAlerts, cableApp])
   
   useEffect (()=>{
-    if(newAlert !== null) {
+    if(newAlert !== null && alerts.length > 0) {
       setAlerts([newAlert, ...alerts])
+    } else if (newAlert !== null && alerts.length === 0) {
+      setAlerts([newAlert])
     }
   },[newAlert])
   return (
