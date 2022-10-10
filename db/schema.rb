@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_16_182435) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_09_200716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "message_id", null: false
+    t.boolean "is_read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_alerts_on_message_id"
+    t.index ["user_id"], name: "index_alerts_on_user_id"
+  end
 
   create_table "email_threads", force: :cascade do |t|
     t.string "subject"
@@ -51,6 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_182435) do
     t.string "contacts", default: [], array: true
   end
 
+  add_foreign_key "alerts", "messages"
+  add_foreign_key "alerts", "users"
   add_foreign_key "messages", "email_threads"
   add_foreign_key "messages", "users"
   add_foreign_key "user_email_threads", "email_threads"

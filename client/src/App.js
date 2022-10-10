@@ -20,7 +20,7 @@ import InboxTable from "./inbox/InboxTable";
 // import Footer from "./Footer";
 // import uuid from 'react-uuid'
 
-function App() {
+function App({cableApp}) {
  const [user , setUser] = useState({})
  const [isAuthenticated , setIsAuthenticated] = useState(null)
  const [errors , setErrors] = useState([])
@@ -32,12 +32,12 @@ function App() {
 
   
   useEffect(() => {
-    // user auto-login
     fetch("/authorize")
       .then(r => {
         if (r.ok) {
           setIsAuthenticated(true)
           r.json().then(user => setUser(user))
+          // cableApp.cable.subscriptions.create({channel: "AlertChannel"})
       } else {setIsAuthenticated(false)}
   })}
   , []);

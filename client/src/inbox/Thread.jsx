@@ -56,11 +56,13 @@ const Thread = ({navigate}) => {
   }
 
   function handleMessageSubmit(e){
+    console.log(recipient[0])
     e.preventDefault()
     const message = {
       email_thread_id: params.threadId,
       body: newMessage ,
-      user_id: user.id
+      user_id: user.id,
+      recipient_id: recipient[0].id
     }
     fetch("/messages" ,{
       method: "POST",

@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :messages , dependent: :destroy
+  has_many :alerts, dependent: :destroy
   has_many :user_email_threads 
   has_many :email_threads , through: :user_email_threads , dependent: :destroy
 

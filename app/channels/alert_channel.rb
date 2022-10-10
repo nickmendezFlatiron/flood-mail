@@ -1,9 +1,11 @@
 class AlertChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "alert_channel"
+    if current_user
+      stream_from("Alerts-#{current_user.id}")
+    end
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    stop_all_streams
   end
 end

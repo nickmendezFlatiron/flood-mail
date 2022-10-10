@@ -36,5 +36,5 @@ end
 
 
 gem "active_model_serializers", "~> 0.10.13"
-gem 'redis', '~> 5.0', '>= 5.0.5'
+gem 'redis', '~> 4.4'
 gem 'actioncable'
