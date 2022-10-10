@@ -9,7 +9,7 @@ class EmailThreadsController < ApplicationController
       
       UserEmailThread.create!(email_thread_id: thread[:id] , user_id: session[:user_id])
       UserEmailThread.create!(email_thread_id: thread[:id] , user_id: recipient[:id])
-            
+      broadcast(recipient, message)    
       render json: thread , status: :created
     else 
       render json: {errors: ["Invalid Message , please try again."]} , status: :unprocessable_entity
@@ -42,5 +42,10 @@ class EmailThreadsController < ApplicationController
   
   def email_thread_params
     params.permit(:message , :username , :user_id , :subject)
+  end
+
+  def broadcast(recipient, message)
+    alert = Alert.create!({message_id: message.id , user_id: recipient[:id]})
+    AlertChannel.broadcast_to("Alerts-#{recipient[:id]}" , {alert: alert, creator: current_user.username, message: message})
   end
 end

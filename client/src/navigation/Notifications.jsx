@@ -38,7 +38,7 @@ const Notifications = ({cableApp, alerts, setAlerts}) => {
     <>
     <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
       <Button variant="dark" className="text-danger d-flex align-items-center justify-content-center">
-        Alerts <Badge bg={alerts?.length > 0 ? "danger" : "transparent"} text="white ms-1" >{alerts?.length > 0 && alerts?.length}</Badge>
+        Alerts <Badge bg={alerts?.length > 0 ? "danger" : "transparent"} text=" ms-1" >{alerts?.length > 0 && alerts?.length}</Badge>
         <span className="visually-hidden">unread messages</span>
       </Button>
     </OverlayTrigger>
