@@ -6,7 +6,7 @@ import actionCable from 'actioncable';
 // import reportWebVitals from './reportWebVitals';
 
 const cableApp = {}
-cableApp.cable = actionCable.createConsumer("redis://red-cd244o6n6mprl49ll8fg:6379")
+cableApp.cable = actionCable.createConsumer("https://flood-mail.onrender.com/cable")
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
