@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 
 const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
   const [alerts, setAlerts] = useState(null)
+  const [newAlert, setNewAlert] = useState(null)
   useEffect(()=>{
    
     fetch("/alerts")
@@ -27,14 +28,20 @@ const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
   useEffect(()=>{
     cableApp.notifications = cableApp.cable.subscriptions.create({channel: "AlertChannel"},{
       received: data => {
-        const newAlert = {...data.alert}
-        newAlert.message = data.message 
-        newAlert.message.creator = data.creator
-        setAlerts([...alerts, newAlert])
+        console.log(alerts)
+        const newAlertRow = {...data.alert}
+        newAlertRow.message = data.message 
+        newAlertRow.message.creator = data.creator
+        setNewAlert(newAlertRow)
       }
     })
-  },[alerts, setAlerts])
+  },[alerts, setAlerts, cableApp])
   
+  useEffect (()=>{
+    if(!newAlert) {
+      setAlerts([newAlert, ...alerts])
+    }
+  },[newAlert])
   return (
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">
       <Container className='justify-content-start'>

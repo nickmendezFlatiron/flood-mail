@@ -34,6 +34,7 @@ const Notifications = ({cableApp, alerts, setAlerts}) => {
       </Popover.Body>
     </Popover>
   );
+
   return (
     <>
     <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>

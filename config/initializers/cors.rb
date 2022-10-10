@@ -7,7 +7,8 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "https://flood-mail.onrender.com/"
+    origins "https://flood-mail.onrender.com"
+    # origins "*"
 
     resource "*",
       headers: :any,

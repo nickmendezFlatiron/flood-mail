@@ -34,7 +34,7 @@ const Thread = ({navigate}) => {
         }
     })
     .then(scroll())
-  },[])
+  },[params.threadId, navigate])
 
   function handleNewMessage(e) {
     setNewMessage(e.target.value)
