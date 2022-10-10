@@ -24,6 +24,20 @@
   color: #c93c4a;
 }
 
+.alerts-list{
+  list-style-type: none;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  cursor: pointer;
+}
+
+.alerts-list:hover{
+  transition: .1s linear all;
+  background-color: #c93c4a39;
+}
+
 .height-match {
   height: 550px;
 }

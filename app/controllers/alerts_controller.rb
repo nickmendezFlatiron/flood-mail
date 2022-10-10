@@ -9,4 +9,15 @@ class AlertsController < ApplicationController
     end
   end
 
+  def show
+    if params[:id]
+      alert = Alert.find_by!(id: params[:id])
+      message = Message.find_by!(id: alert[:message_id])
+      alert.destroy
+      render json: {email_thread_id: message[:email_thread_id]} , status: :ok
+    else
+      render json: {errors: ["Delete failed"]},  status: :unauthorized
+    end
+  end
+
 end

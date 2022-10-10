@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_09_200716) do
   create_table "alerts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "message_id", null: false
-    t.boolean "is_read"
+    t.boolean "is_read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_alerts_on_message_id"
