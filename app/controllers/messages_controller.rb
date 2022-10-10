@@ -28,6 +28,7 @@ class MessagesController < ApplicationController
   def broadcast(email, message)
     recipient = User.find_by(id: params[:recipient_id])
     alert = Alert.create!({message_id: message.id , user_id: params[:recipient_id]})
-    AlertChannel.broadcast_to("Alerts-#{params[:recipient_id]}" , {alert: recipient.alerts.all , email: email})
+    creator = User.find(message[:user_id]).username
+    AlertChannel.broadcast_to("Alerts-#{params[:recipient_id]}" , {alert: alert, creator: creator, message: message})
   end
 end

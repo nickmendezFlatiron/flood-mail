@@ -1,13 +1,13 @@
 class AlertChannel < ApplicationCable::Channel
   def subscribed
     if current_user
-      stream_from("Alerts-#{current_user.id}")
+      stream_for("Alerts-#{current_user.id}")
     end
   end
 
-  # def received (data)
-  #   ActionCable.server.broadcast("chat_#{params[:room]}", data)
-  # end
+  def received (data)
+    AlertChannel.broadcast_to("Alerts-#{current_user.id}", data)
+  end
 
 
   def unsubscribed

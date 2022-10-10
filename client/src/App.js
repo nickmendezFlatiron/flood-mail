@@ -37,7 +37,6 @@ function App({cableApp}) {
         if (r.ok) {
           setIsAuthenticated(true)
           r.json().then(user => setUser(user))
-          cableApp.notifications = cableApp.cable.subscriptions.create({channel: "AlertChannel"})
       } else {setIsAuthenticated(false)}
   })
   

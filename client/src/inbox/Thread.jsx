@@ -56,7 +56,6 @@ const Thread = ({navigate}) => {
   }
 
   function handleMessageSubmit(e){
-    console.log(recipient[0])
     e.preventDefault()
     const message = {
       email_thread_id: params.threadId,

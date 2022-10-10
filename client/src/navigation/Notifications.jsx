@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Badge  from 'react-bootstrap/Badge'
 import Button  from 'react-bootstrap/Button'
@@ -7,7 +7,6 @@ import Popover from 'react-bootstrap/Popover';
 
 const Notifications = ({cableApp, alerts, setAlerts}) => {
   const navigate = useNavigate()
-  console.log(alerts)
   const renderAlerts = alerts && alerts.map(alert=> {
     function handleClick(e){
       e.preventDefault()
@@ -20,8 +19,8 @@ const Notifications = ({cableApp, alerts, setAlerts}) => {
       }
       )
     }
-    return  <li className={`alerts-list`} onClick={handleClick}>
-              New message from <strong>{alert.message.creator}</strong>
+    return  <li key={alert.id} className={`alerts-list`} onClick={handleClick}>
+              New message from 
             </li>
   })
 
