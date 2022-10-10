@@ -24,6 +24,10 @@
   color: #c93c4a;
 }
 
+.notifications-dropdown{
+  max-height: 150px;
+  overflow-y: auto;
+}
 .alerts-list{
   list-style-type: none;
   padding-right: 8px;

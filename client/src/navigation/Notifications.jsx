@@ -27,7 +27,7 @@ const Notifications = ({cableApp, alerts, setAlerts}) => {
   const popover = (
     <Popover id="popover-basic" >
       <Popover.Header as="h3" className="text-center">Notifications</Popover.Header>
-      <Popover.Body className='p-0'>
+      <Popover.Body className='p-0 notifications-dropdown'>
        <ul className='text-center p-0 justify-content-center'>
           {renderAlerts}
        </ul>
@@ -37,8 +37,8 @@ const Notifications = ({cableApp, alerts, setAlerts}) => {
   return (
     <>
     <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-      <Button variant="dark" className="text-danger">
-        Alerts <Badge bg={alerts?.length > 0 ? "danger" : "transparent"} text="white" >{alerts?.length > 0 && alerts?.length}</Badge>
+      <Button variant="dark" className="text-danger d-flex align-items-center justify-content-center">
+        Alerts <Badge bg={alerts?.length > 0 ? "danger" : "transparent"} text="white ms-1" >{alerts?.length > 0 && alerts?.length}</Badge>
         <span className="visually-hidden">unread messages</span>
       </Button>
     </OverlayTrigger>
