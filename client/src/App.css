@@ -69,6 +69,7 @@
   background-color: rgba(180, 230, 180, 0.482);
   border: rgb(199, 235, 200);
   border-style: solid;
+  overflow-wrap: break-word;
 }
 
 .receiver {
@@ -80,6 +81,7 @@
   border: rgb(230, 230, 230);
   width: 35vw;
   border-style: solid;
+  overflow-wrap: break-word;
 }
 
 .sender h6 {

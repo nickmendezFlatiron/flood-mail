@@ -20,13 +20,13 @@ const Notifications = ({cableApp, alerts, setAlerts}) => {
       )
     }
     return  <li key={alert.id} className={`alerts-list`} onClick={handleClick}>
-              New message from 
+              New message from <strong>{alert.message.creator}</strong>
             </li>
   })
 
   const popover = (
     <Popover id="popover-basic" >
-      <Popover.Header as="h3">Notifications</Popover.Header>
+      <Popover.Header as="h3" className="text-center">Notifications</Popover.Header>
       <Popover.Body className='p-0'>
        <ul className='text-center p-0 justify-content-center'>
           {renderAlerts}

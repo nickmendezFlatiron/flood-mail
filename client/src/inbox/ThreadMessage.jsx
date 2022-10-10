@@ -21,7 +21,7 @@ const ThreadMessage = ({message, recipient , threadInfo , setThreadInfo}) => {
   return ( 
     <Row className={`${variant} rounded-3 p-3 m-3 shadow-sm`}>
       <CloseButton onClick={handleDelete}></CloseButton>
-      <p>{message.body}</p>
+      <p className='text-wrap'>{message.body}</p>
       <h6 className="mt-2 ">{message.creator} <small className="text-muted text-end">at {time}</small></h6>
     </Row>
   )

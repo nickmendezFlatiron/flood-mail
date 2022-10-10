@@ -18,11 +18,6 @@ const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
       .then(r =>{
           if (r.ok){
             r.json().then(r => setAlerts(r))
-            cableApp.notifications = cableApp.cable.subscriptions.create({channel: "AlertChannel"},{
-              received: data => {
-                
-              }
-            })
           } else {
             console.log("fail")
           }
@@ -30,8 +25,15 @@ const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
   },[])
 
   useEffect(()=>{
-  
-  },[alerts])
+    cableApp.notifications = cableApp.cable.subscriptions.create({channel: "AlertChannel"},{
+      received: data => {
+        const newAlert = {...data.alert}
+        newAlert.message = data.message 
+        newAlert.message.creator = data.creator
+        setAlerts([...alerts, newAlert])
+      }
+    })
+  },[alerts, setAlerts])
   
   return (
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">
