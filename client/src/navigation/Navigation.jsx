@@ -5,11 +5,23 @@ import { Navbar , Nav , Container } from 'react-bootstrap'
 import DropDown from './DropDown'
 import image from  "../assets/logo.png"
 import Notifications from './Notifications'
+import { useEffect, useState } from 'react'
 
 // import LoginModal from '../home/LoginModal'
 
 
-const Navigation = ({user, setUser ,  setIsAuthenticated }) => {
+const Navigation = ({user, setUser ,  setIsAuthenticated , cableApp}) => {
+  const [alerts, setAlerts] = useState(null)
+  useEffect(()=>{
+    fetch("/alerts")
+      .then(r =>{
+          if (r.ok){
+            r.json().then(r => setAlerts(r))
+          } else {
+            console.log("fail")
+          }
+      })
+  },[])
   
   return (
     <Navbar className='border-3 border-bottom' bg="dark" variant="dark">
@@ -19,7 +31,7 @@ const Navigation = ({user, setUser ,  setIsAuthenticated }) => {
       </Container>
       <Container className='justify-content-end text-danger'>
       <Nav>
-        <Notifications />
+        <Notifications cableApp={cableApp} alerts={alerts} setAlerts={setAlerts}/>
         <Nav.Link as={Link} to="/inbox/table" exact={true}>Inbox</Nav.Link>
         <DropDown user={user} setUser={setUser} setIsAuthenticated={setIsAuthenticated}/> 
       </Nav>

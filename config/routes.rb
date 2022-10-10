@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post "/signup" , to: "users#create" 
   get "/authorize" , to: "users#show"
   
+  resources :alerts , only: [:index]
   # Email Threads Controller
   get "/user/threads", to: "email_threads#index"
   

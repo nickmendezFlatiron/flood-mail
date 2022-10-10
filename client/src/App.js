@@ -37,10 +37,14 @@ function App({cableApp}) {
         if (r.ok) {
           setIsAuthenticated(true)
           r.json().then(user => setUser(user))
-          // cableApp.cable.subscriptions.create({channel: "AlertChannel"})
+          cableApp.notifications = cableApp.cable.subscriptions.create({channel: "AlertChannel"})
       } else {setIsAuthenticated(false)}
-  })}
-  , []);
+  })
+  
+  // return (()=>{
+  //   // cableApp.notifications.unsubscribe()
+  // }, [])
+}, []);
 
   const renderSignup = <SignupForm navigate={navigate} isAuthenticated={isAuthenticated} setUser={setUser} errors={errors}  setIsAuthenticated={ setIsAuthenticated} setErrors={setErrors}/>
 
@@ -49,7 +53,7 @@ function App({cableApp}) {
 
   return (
     <Fragment >
-      <Navigation user={user} setUser={setUser}  setIsAuthenticated={setIsAuthenticated} />
+      <Navigation cableApp={cableApp} user={user} setUser={setUser}  setIsAuthenticated={setIsAuthenticated} />
       <Routes>
         <Route path="/" element={<Homepage user={user}/>} />
         <Route path="/account" exact={true} element={<Account setUser={setUser} user={user}  setIsAuthenticated={setIsAuthenticated} navigate={navigate} />} />

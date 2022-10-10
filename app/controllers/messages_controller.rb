@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
       message = current_user.messages.create!(message_params)
       email_thread = EmailThread.find(params[:email_thread_id])
       email_thread.update(message_count: email_thread[:message_count] + 1)
-      broadcast(params[:email_thread_id], message)
+      broadcast(email_thread, message)
       render json: message , status: :created
     end
   end
@@ -25,10 +25,9 @@ class MessagesController < ApplicationController
     params.permit(:body, :email_thread_id )
   end
 
-  def broadcast(thread_id, message)
-    byebug
+  def broadcast(email, message)
     recipient = User.find_by(id: params[:recipient_id])
     alert = Alert.create!({message_id: message.id , user_id: params[:recipient_id]})
-    AlertChannel.broadcast_to(recipient , {alert: User.alerts})
+    AlertChannel.broadcast_to("Alerts-#{params[:recipient_id]}" , {alert: recipient.alerts.all , email: email})
   end
 end

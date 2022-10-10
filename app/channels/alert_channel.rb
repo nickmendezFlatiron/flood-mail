@@ -5,6 +5,11 @@ class AlertChannel < ApplicationCable::Channel
     end
   end
 
+  # def received (data)
+  #   ActionCable.server.broadcast("chat_#{params[:room]}", data)
+  # end
+
+
   def unsubscribed
     stop_all_streams
   end
