@@ -6,7 +6,7 @@ import actionCable from 'actioncable';
 // import reportWebVitals from './reportWebVitals';
 
 const cableApp = {}
-cableApp.cable = actionCable.createConsumer("wss://localhost:3000/cable")
+cableApp.cable = actionCable.createConsumer("ws://localhost:3000/cable")
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
